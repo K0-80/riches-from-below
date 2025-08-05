@@ -4,7 +4,7 @@
 	"texture_size": [128, 128],
 	"textures": {
 		"0": "richesfrombelow:block/gatcha_machine",
-		"particle": "richesfrombelow:block/gatcha_machine"
+		"particle": "richesfrombelow:block/gatcha_machine_particle"
 	},
 	"elements": [
 		{

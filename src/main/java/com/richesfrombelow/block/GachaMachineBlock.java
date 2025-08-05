@@ -41,6 +41,7 @@ public class GachaMachineBlock extends BlockWithEntity implements BlockEntityPro
                 .with(HALF, DoubleBlockHalf.LOWER));
     }
 
+
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!world.isClient) {
@@ -66,7 +67,7 @@ public class GachaMachineBlock extends BlockWithEntity implements BlockEntityPro
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return validateTicker(type, ModBlockEntities.GACHA_MACHINE_BLOCK_ENTITY_TYPE,
-                (world1, pos, state1, be) -> GachaMachineBlockEntity.tick(world1, pos, state1, be));
+                GachaMachineBlockEntity::tick);
     }
 
     @Override
@@ -96,17 +97,19 @@ public class GachaMachineBlock extends BlockWithEntity implements BlockEntityPro
     }
 
     @Override
-    public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
-        if (!world.isClient && player.isCreative()) {
-            if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-                BlockPos blockPos = pos.down();
-                BlockState blockState = world.getBlockState(blockPos);
-                if (blockState.isOf(this) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
-                    world.setBlockState(blockPos, Blocks.AIR.getDefaultState(), Block.NOTIFY_ALL | Block.SKIP_DROPS);
-                }
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (!world.isClient && !player.isCreative()) {
+            DoubleBlockHalf half = state.get(HALF);
+            BlockPos otherHalfPos = half == DoubleBlockHalf.LOWER ? pos.up() : pos.down();
+            BlockState otherHalfState = world.getBlockState(otherHalfPos);
+            if (otherHalfState.isOf(this) && otherHalfState.get(HALF) != half) {
+                world.setBlockState(otherHalfPos, Blocks.AIR.getDefaultState(), Block.NOTIFY_ALL | Block.SKIP_DROPS);
             }
         }
-        super.onBreak(world, pos, state, player);    }
+
+        super.onBreak(world, pos, state, player);
+        return state;
+    };
 
     @Override
     protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {

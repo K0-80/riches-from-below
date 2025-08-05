@@ -38,7 +38,6 @@ public class GatchaBallEntity extends LivingEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.0);
     }
 
-
     //amazing ai generated slop start
     public final Quaternionf clientRotation = new Quaternionf();
     public final Quaternionf prevClientRotation = new Quaternionf();
