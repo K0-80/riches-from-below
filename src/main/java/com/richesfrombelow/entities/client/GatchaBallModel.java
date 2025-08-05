@@ -11,6 +11,7 @@ public class GatchaBallModel <T extends GatchaBallEntity> extends SinglePartEnti
     public GatchaBallModel(ModelPart root) {
         this.bb_main = root.getChild("bb_main");
     }
+
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();

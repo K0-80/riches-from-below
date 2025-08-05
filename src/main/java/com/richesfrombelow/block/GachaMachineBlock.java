@@ -2,17 +2,25 @@ package com.richesfrombelow.block;
 
 import com.mojang.serialization.MapCodec;
 import com.richesfrombelow.block.entity.GachaMachineBlockEntity;
+import com.richesfrombelow.block.entity.ModBlockEntities;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -31,6 +39,34 @@ public class GachaMachineBlock extends BlockWithEntity implements BlockEntityPro
         this.setDefaultState(this.stateManager.getDefaultState()
                 .with(FACING, Direction.NORTH)
                 .with(HALF, DoubleBlockHalf.LOWER));
+    }
+
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (!world.isClient) {
+            BlockPos bePos = state.get(HALF) == DoubleBlockHalf.LOWER ? pos : pos.down();
+            BlockEntity be = world.getBlockEntity(bePos);
+
+            if (be instanceof GachaMachineBlockEntity gachaMachineEntity && player.getStackInHand(player.getActiveHand()).isOf(Items.EMERALD)) {
+                if(gachaMachineEntity.getActivationTicks() == 0){
+                    world.playSound(null, pos, SoundEvents.BLOCK_VAULT_INSERT_ITEM, SoundCategory.BLOCKS, 1.0f, 1.2f);
+                    gachaMachineEntity.activate();
+                    if(!player.isCreative()){
+                        player.getStackInHand(player.getActiveHand()).decrement(1);
+                    }
+                    return ActionResult.SUCCESS;
+                }
+            }
+        }
+        return ActionResult.PASS;
+    }
+
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return validateTicker(type, ModBlockEntities.GACHA_MACHINE_BLOCK_ENTITY_TYPE,
+                (world1, pos, state1, be) -> GachaMachineBlockEntity.tick(world1, pos, state1, be));
     }
 
     @Override
@@ -94,7 +130,7 @@ public class GachaMachineBlock extends BlockWithEntity implements BlockEntityPro
 
     @Override
     public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
+        return BlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Nullable
