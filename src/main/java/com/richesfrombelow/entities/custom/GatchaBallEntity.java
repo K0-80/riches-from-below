@@ -1,17 +1,24 @@
 package com.richesfrombelow.entities.custom;
 
-import com.richesfrombelow.items.ModItems;
+import com.richesfrombelow.util.GatchaBallLootTableUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.particle.BlockStateParticleEffect;
-import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -23,18 +30,70 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class GatchaBallEntity extends LivingEntity {
+
+    private static final TrackedData<Integer> GATCHA_TIER = DataTracker.registerData(GatchaBallEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private List<ItemStack> lootToDrop = new ArrayList<>();
 
     public GatchaBallEntity(EntityType<? extends GatchaBallEntity> entityType, World world) {
         super(entityType, world);
         this.setNoGravity(false);
     }
 
+    public void initialize(GatchaBallLootTableUtil.GatchaResult result) {
+        this.dataTracker.set(GATCHA_TIER, result.tier().ordinal());
+        this.lootToDrop.clear();
+        this.lootToDrop.addAll(result.items());
+    }
+
+    public GatchaBallLootTableUtil.GatchaTier getGatchaTier() {
+        return GatchaBallLootTableUtil.GatchaTier.values()[this.dataTracker.get(GATCHA_TIER)];
+    }
+
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(GATCHA_TIER, GatchaBallLootTableUtil.GatchaTier.COMMON.ordinal());
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putInt("GatchaTier", getGatchaTier().ordinal());
+
+        NbtList nbtList = new NbtList();
+        for (ItemStack itemStack : this.lootToDrop) {
+            if (!itemStack.isEmpty()) {
+                nbtList.add(itemStack.encode(this.getRegistryManager()));
+            }
+        }
+        nbt.put("LootToDrop", nbtList);
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        if (nbt.contains("GatchaTier")) {
+            this.dataTracker.set(GATCHA_TIER, nbt.getInt("GatchaTier"));
+        }
+
+        this.lootToDrop.clear();
+        NbtList nbtList = nbt.getList("LootToDrop", NbtElement.COMPOUND_TYPE);
+        for (int i = 0; i < nbtList.size(); ++i) {
+            ItemStack.fromNbt(getRegistryManager(), nbtList.getCompound(i)).ifPresent(this.lootToDrop::add);
+        }
+    }
+    //loot end
+
+
+
     public static DefaultAttributeContainer.Builder createGatchaBallAttributes() {
         return LivingEntity.createLivingAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 100)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.0);
     }
 
@@ -99,31 +158,77 @@ public class GatchaBallEntity extends LivingEntity {
             return false;
         }
 
-        if (source.getAttacker() instanceof PlayerEntity player) {
+        if (source.getAttacker() instanceof PlayerEntity) {
             this.playBreakSound();
-            this.dropItem(ModItems.GATCHA_BALL_ITEM);
+            this.spawnTieredParticles();
+            if (!this.lootToDrop.isEmpty()) {
+                for (ItemStack stack : this.lootToDrop) {
+                    this.dropStack(stack);
+                }
+            }
             this.discard();
             return true;
         }
-
         return false;
     }
 
-    private void playBreakSound() {
-        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_ITEM_FRAME_BREAK, this.getSoundCategory(), 1.0F, 1.0F);
-        if (this.getWorld() instanceof ServerWorld serverWorld) {
-            serverWorld.spawnParticles(
-                    new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(ModItems.GATCHA_BALL_ITEM)),
-                    this.getX(),
-                    (this.getY() + this.getHeight() / 2.0) + 0.2,
-                    this.getZ(),
-                    10,
-                    this.getWidth() / 4.0F,
-                    this.getHeight() / 4.0F,
-                    this.getWidth() / 4.0F,
-                    0.05
-            );
+    private void spawnTieredParticles() {
+        if (!(this.getWorld() instanceof ServerWorld serverWorld)) {
+            return;
         }
+
+        GatchaBallLootTableUtil.GatchaTier tier = this.getGatchaTier();
+        Vec3d center = this.getPos().add(0, this.getHeight() / 2.0, 0);
+        double spread = this.getWidth() / 2.5;
+
+        switch (tier) {
+            case COMMON -> serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.GRAY_CONCRETE.getDefaultState()),
+                    center.x, center.y, center.z, 10, spread, spread, spread, 0.1);
+            case UNCOMMON -> {
+                serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.LIME_CONCRETE.getDefaultState()),
+                        center.x, center.y, center.z, 10, spread, spread, spread, 0.1);
+                serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.GREEN_CONCRETE.getDefaultState()),
+                        center.x, center.y, center.z, 5, spread, spread, spread, 0.1);
+            }
+            case RARE -> {
+                serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.LIGHT_BLUE_CONCRETE.getDefaultState()),
+                        center.x, center.y, center.z, 10, spread, spread, spread, 0.1);
+                serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.BLUE_CONCRETE.getDefaultState()),
+                        center.x, center.y, center.z, 5, spread, spread, spread, 0.1);
+            }
+            case EPIC -> {
+                serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.MAGENTA_CONCRETE.getDefaultState()),
+                        center.x, center.y, center.z, 10, spread, spread, spread, 0.1);
+                serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.PURPLE_CONCRETE.getDefaultState()),
+                        center.x, center.y, center.z, 5, spread, spread, spread, 0.1);
+            }
+            case LEGENDARY -> {
+                serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.YELLOW_CONCRETE.getDefaultState()),
+                        center.x, center.y, center.z, 10, spread, spread, spread, 0.15);
+                serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.ORANGE_CONCRETE.getDefaultState()),
+                        center.x, center.y, center.z, 5, spread, spread, spread, 0.15);
+                serverWorld.spawnParticles(ParticleTypes.END_ROD,
+                        center.x, center.y, center.z, 10, spread, spread, spread, 0.05);
+            }
+            case EXOTIC -> {
+                List<Block> glasses = List.of(
+                        Blocks.WHITE_STAINED_GLASS, Blocks.ORANGE_STAINED_GLASS, Blocks.MAGENTA_STAINED_GLASS,
+                        Blocks.LIGHT_BLUE_STAINED_GLASS, Blocks.YELLOW_STAINED_GLASS, Blocks.LIME_STAINED_GLASS,
+                        Blocks.PINK_STAINED_GLASS, Blocks.GRAY_STAINED_GLASS, Blocks.LIGHT_GRAY_STAINED_GLASS,
+                        Blocks.CYAN_STAINED_GLASS, Blocks.PURPLE_STAINED_GLASS, Blocks.BLUE_STAINED_GLASS,
+                        Blocks.BROWN_STAINED_GLASS, Blocks.GREEN_STAINED_GLASS, Blocks.RED_STAINED_GLASS,
+                        Blocks.BLACK_STAINED_GLASS
+                );
+                for (Block glass : glasses) {
+                    serverWorld.spawnParticles(new BlockStateParticleEffect(ParticleTypes.BLOCK, glass.getDefaultState()),
+                            center.x, center.y, center.z, 2, spread, spread, spread, 0.1);
+                }
+            }
+        }
+    }
+
+    private void playBreakSound() {
+        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_ITEM_FRAME_BREAK, this.getSoundCategory(), 1.0F, 1.3F);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class GachaMachineBlockEntityRenderer implements BlockEntityRenderer<Gach
 
         int activationTicks = entity.getActivationTicks();
         if (activationTicks > 0) {
-            float totalAnimationTime = (float) GachaMachineBlockEntity.ANIMATION_TIME;
+            float totalAnimationTime = (float) entity.getTotalAnimationTicks();
             float progress = totalAnimationTime - (float) activationTicks + tickDelta;
 
             float shakeStartTime = 10.0f;
@@ -100,8 +100,8 @@ public class GachaMachineBlockEntityRenderer implements BlockEntityRenderer<Gach
         float expandPhaseEnd = shrinkPhaseEnd + 3.0f;
         float returnPhaseEnd = expandPhaseEnd + 5.0f;
 
-        float minScale = 0.8f;
-        float maxScale = 1.2f;
+        float minScale = 0.7f;
+        float maxScale = 1.3f;
 
         if (progress < shrinkPhaseEnd) { // Shrink
             float phaseProgress = (progress - shakeEndTime) / (shrinkPhaseEnd - shakeEndTime);
