@@ -3,9 +3,9 @@
 	"id": "richesfrombelow",
 	"version": "${version}",
 	"name": "RichesfromBelow",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Nothing is free",
 	"authors": [
-		"Me!"
+		"K08_"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"com.richesfrombelow.RichesfromBelow"
+		],
+		"client": [
+			"com.richesfrombelow.RichesfromBelowClient"
 		],
 		"fabric-datagen": [
 			"com.richesfrombelow.RichesfromBelowDataGenerator"

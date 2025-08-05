@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,half=lower": {
+      "model": "richesfrombelow:block/gacha_machine_block_bottom",
+      "y": 90
+    },
+    "facing=east,half=upper": {
+      "model": "richesfrombelow:block/gacha_machine_block_top",
+      "y": 90
+    },
+    "facing=north,half=lower": {
+      "model": "richesfrombelow:block/gacha_machine_block_bottom"
+    },
+    "facing=north,half=upper": {
+      "model": "richesfrombelow:block/gacha_machine_block_top"
+    },
+    "facing=south,half=lower": {
+      "model": "richesfrombelow:block/gacha_machine_block_bottom",
+      "y": 180
+    },
+    "facing=south,half=upper": {
+      "model": "richesfrombelow:block/gacha_machine_block_top",
+      "y": 180
+    },
+    "facing=west,half=lower": {
+      "model": "richesfrombelow:block/gacha_machine_block_bottom",
+      "y": 270
+    },
+    "facing=west,half=upper": {
+      "model": "richesfrombelow:block/gacha_machine_block_top",
+      "y": 270
+    }
+  }
+}
