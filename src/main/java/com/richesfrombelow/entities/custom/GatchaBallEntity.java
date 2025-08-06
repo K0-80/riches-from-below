@@ -228,7 +228,8 @@ public class GatchaBallEntity extends LivingEntity {
     }
 
     private void playBreakSound() {
-        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_ITEM_FRAME_BREAK, this.getSoundCategory(), 1.0F, 1.3F);
+        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_VAULT_REJECT_REWARDED_PLAYER, this.getSoundCategory(), 1.0F, 1.8F);
+        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_VAULT_EJECT_ITEM, this.getSoundCategory(), 1.0F, 1.8F);
     }
 
     @Override

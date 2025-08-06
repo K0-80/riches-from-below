@@ -12,6 +12,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.math.RotationAxis;
 
@@ -29,7 +30,9 @@ public class GachaMachineBlockEntityRenderer implements BlockEntityRenderer<Gach
     public void render(GachaMachineBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         matrices.push();
 
+        BlockState bottomState = entity.getCachedState();
         int activationTicks = entity.getActivationTicks();
+
         if (activationTicks > 0) {
             float totalAnimationTime = (float) entity.getTotalAnimationTicks();
             float progress = totalAnimationTime - (float) activationTicks + tickDelta;
@@ -62,8 +65,11 @@ public class GachaMachineBlockEntityRenderer implements BlockEntityRenderer<Gach
 
                 float angle = currentMaxAngle * (float) Math.sin(phase);
 
+                Direction facing = bottomState.get(GachaMachineBlock.FACING);
+                RotationAxis axis = facing.getAxis() == Direction.Axis.X ? RotationAxis.POSITIVE_X : RotationAxis.POSITIVE_Z;
+
                 matrices.translate(0.5, 0.0, 0.5);
-                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(angle));
+                matrices.multiply(axis.rotationDegrees(angle));
                 matrices.translate(-0.5, 0.0, -0.5);
 
             } else if (progress >= shakeEndTime) { //expand animation
@@ -75,7 +81,6 @@ public class GachaMachineBlockEntityRenderer implements BlockEntityRenderer<Gach
             }
         }
 
-        BlockState bottomState = entity.getCachedState();
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(bottomState));
         this.blockRenderManager.renderBlock(bottomState, entity.getPos(), entity.getWorld(), matrices, vertexConsumer, false, this.random);
 

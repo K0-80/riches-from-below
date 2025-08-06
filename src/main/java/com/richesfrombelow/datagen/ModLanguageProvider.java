@@ -23,7 +23,9 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.GATCHA_BALL_ITEM, "Gatcha Ball");
         translationBuilder.add(ModEntities.GATCHA_BALL, "Gatcha Ball");
         translationBuilder.add(ModBlocks.GACHA_MACHINE_BLOCK, "Gatcha Machine");
+
         translationBuilder.add(ModItems.KOBO_COIN, "K0BO Coin™");
+        translationBuilder.add(ModItems.COIN_FRAGMENT, "Coin Fragment");
 
         translationBuilder.add("item.richesfrombelow.plushie", "Plushie");
         translationBuilder.add(  "item.richesfrombelow.plushie.pattern", "%s Plushie");

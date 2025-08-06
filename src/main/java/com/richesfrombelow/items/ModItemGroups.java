@@ -30,11 +30,6 @@ public class ModItemGroups {
                             //INF PLUSH!!!!
                             entries.add(ModItems.PLUSHIE);
 
-                            ItemStack creeperPlushie = new ItemStack(ModItems.PLUSHIE);
-                            creeperPlushie.set(ModDataComponents.PLUSHIE_VARIANT, new PlushieVariant("creeper"));
-                            creeperPlushie.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(1));
-                            entries.add(creeperPlushie);
-
                             ItemStack k08Plushie = new ItemStack(ModItems.PLUSHIE);
                             k08Plushie.set(ModDataComponents.PLUSHIE_VARIANT, new PlushieVariant("k08"));
                             k08Plushie.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(2));

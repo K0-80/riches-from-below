@@ -97,9 +97,10 @@ public class GachaMachineBlock extends BlockWithEntity implements BlockEntityPro
         world.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER), Block.NOTIFY_ALL);
     }
 
+
     @Override
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (!world.isClient && !player.isCreative()) {
+        if (!world.isClient() ) {
             DoubleBlockHalf half = state.get(HALF);
             BlockPos otherHalfPos = half == DoubleBlockHalf.LOWER ? pos.up() : pos.down();
             BlockState otherHalfState = world.getBlockState(otherHalfPos);

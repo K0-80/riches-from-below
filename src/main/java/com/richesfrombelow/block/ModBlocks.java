@@ -14,7 +14,7 @@ public class ModBlocks {
 
 
     public static final Block GACHA_MACHINE_BLOCK = registerBlock("gacha_machine_block",
-            new GachaMachineBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().luminance(state -> 10)));
+            new GachaMachineBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().requiresTool().luminance(state -> 10)));
 
 
     // Helper for blocks with a standard item

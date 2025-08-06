@@ -1,1 +1,5 @@
-// 1.21	2025-08-05T23:10:58.2531173	RichesfromBelow/Recipes
+// 1.21	2025-08-06T00:29:03.5425305	RichesfromBelow/Recipes
+c35a99fc7069a230b6c62e550bd888313f03444c data\richesfrombelow\recipe\coin_fragment.json
+6928d00b7d82eb8736bdb7b6e956ec1f65099726 data\richesfrombelow\advancement\recipes\misc\coin_fragment.json
+d79dcfe2b5dfce31652862d7b20140e995b25372 data\richesfrombelow\advancement\recipes\misc\kobo_coin.json
+dc5e7fc431a5d645379f651c7d17684096fe6d06 data\richesfrombelow\recipe\kobo_coin.json
