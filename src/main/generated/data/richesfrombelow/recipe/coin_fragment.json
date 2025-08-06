@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "richesfrombelow:kobo_coin"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "richesfrombelow:coin_fragment"
+  }
+}
