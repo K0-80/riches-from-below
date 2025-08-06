@@ -25,7 +25,8 @@ public class GatchaBallRenderer extends LivingEntityRenderer<GatchaBallEntity, G
 
     @Override
     protected void setupTransforms(GatchaBallEntity entity, MatrixStack matrices, float ageInTicks, float bodyYaw, float partialTick, float scale) {
-//        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180.0F));
+
         float yOffset = 2.5f / 16.0f;
 
         matrices.translate(0.0D, yOffset, 0.0D);

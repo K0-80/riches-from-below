@@ -1,0 +1,17 @@
+{
+	"parent": "richesfrombelow:item/plushie/fallback",
+	"overrides": [
+		{
+			"predicate": {
+				"custom_model_data": 1
+			},
+			"model": "richesfrombelow:item/plushie/creeper"
+		},
+		{
+			"predicate": {
+				"custom_model_data": 2
+			},
+			"model": "richesfrombelow:item/plushie/k08"
+		}
+	]
+}

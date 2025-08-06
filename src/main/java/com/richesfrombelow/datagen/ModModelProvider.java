@@ -19,6 +19,7 @@ public class ModModelProvider extends FabricModelProvider    {
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
 
         itemModelGenerator.register(ModItems.GATCHA_BALL_ITEM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.KOBO_COIN, Models.GENERATED);
 
     }
 }

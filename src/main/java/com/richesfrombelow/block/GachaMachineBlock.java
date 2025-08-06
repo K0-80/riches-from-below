@@ -3,6 +3,7 @@ package com.richesfrombelow.block;
 import com.mojang.serialization.MapCodec;
 import com.richesfrombelow.block.entity.GachaMachineBlockEntity;
 import com.richesfrombelow.block.entity.ModBlockEntities;
+import com.richesfrombelow.items.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -48,7 +49,7 @@ public class GachaMachineBlock extends BlockWithEntity implements BlockEntityPro
             BlockPos bePos = state.get(HALF) == DoubleBlockHalf.LOWER ? pos : pos.down();
             BlockEntity be = world.getBlockEntity(bePos);
 
-            if (be instanceof GachaMachineBlockEntity gachaMachineEntity && player.getStackInHand(player.getActiveHand()).isOf(Items.EMERALD)) {
+            if (be instanceof GachaMachineBlockEntity gachaMachineEntity && player.getStackInHand(player.getActiveHand()).isOf(ModItems.KOBO_COIN)) {
                 if(gachaMachineEntity.getActivationTicks() == 0){
                     world.playSound(null, pos, SoundEvents.BLOCK_VAULT_INSERT_ITEM, SoundCategory.BLOCKS, 1.0f, 1.2f);
                     gachaMachineEntity.activate();

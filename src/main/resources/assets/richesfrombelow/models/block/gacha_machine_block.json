@@ -3,8 +3,13 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "richesfrombelow:block/gatcha_machine",
-		"particle": "richesfrombelow:block/gatcha_machine_particle"
+		"0": "richesfrombelow:block/gatcha_machine/gatcha_machine",
+		"2": "richesfrombelow:block/gatcha_machine/gatcha_ball_common",
+		"3": "richesfrombelow:block/gatcha_machine/gatcha_ball_uncommon",
+		"4": "richesfrombelow:block/gatcha_machine/gatcha_ball_epic",
+		"6": "richesfrombelow:block/gatcha_machine/gatcha_ball_legendary",
+		"7": "richesfrombelow:block/gatcha_machine/gatcha_ball_rare",
+		"particle": "richesfrombelow:block/gatcha_machine/gatcha_machine_particle"
 	},
 	"elements": [
 		{

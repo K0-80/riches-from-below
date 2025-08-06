@@ -28,7 +28,6 @@ public class GatchaBallLootTableUtil {
     }
 
     public static int getAnimationTicks(GatchaTier tier) {
-        RichesfromBelow.LOGGER.info("tier" + tier);
         return switch (tier) {
             case COMMON -> 2 * 20;
             case UNCOMMON -> 3 * 20;

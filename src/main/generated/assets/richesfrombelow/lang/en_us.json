@@ -1,5 +1,12 @@
 {
   "block.richesfrombelow.gacha_machine_block": "Gatcha Machine",
   "entity.richesfrombelow.gatcha_ball": "Gatcha Ball",
-  "item.richesfrombelow.gatcha_ball_item": "Gatcha Ball"
+  "item.richesfrombelow.gatcha_ball_item": "Gatcha Ball",
+  "item.richesfrombelow.kobo_coin": "K0BO Coin™",
+  "item.richesfrombelow.plushie": "Plushie",
+  "item.richesfrombelow.plushie.creeper": "Creeper",
+  "item.richesfrombelow.plushie.k08": "K08_",
+  "item.richesfrombelow.plushie.pattern": "%s Plushie",
+  "itemgroup.riches.riches_items": "Riches from Below",
+  "itemgroup.riches.riches_plush": "Plushies"
 }
