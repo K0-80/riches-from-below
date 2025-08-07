@@ -28,16 +28,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerReversibleCompactingRecipes(recipeExporter, RecipeCategory.MISC, ModItems.COIN_FRAGMENT, RecipeCategory.MISC, ModItems.KOBO_COIN);
 
 
-        //gatcha machine
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModBlocks.GACHA_MACHINE_BLOCK, 1)
-                .pattern("GGG")
-                .pattern("IGR")
-                .pattern("IBI")
+        // gacha machine
+        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.GACHA_MACHINE_BLOCK, 1)
+                .pattern("GG ")
+                .pattern("GR ")
+                .pattern("II ")
                 .input('G', Items.GLASS)
-                .input('B', Items.IRON_BLOCK)
-                .input('B', Items.IRON_INGOT)
-                .input('R', Items.REDSTONE)
-                .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
+                .input('I', Items.IRON_BLOCK)
+                .input('R', Items.REDSTONE_BLOCK)
+                .criterion(hasItem(Items.IRON_BLOCK), conditionsFromItem(Items.IRON_BLOCK))
                 .offerTo(recipeExporter, RecipeProvider.getRecipeName(ModBlocks.GACHA_MACHINE_BLOCK));
     }
 }

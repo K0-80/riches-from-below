@@ -1,11 +1,20 @@
 {
   "block.richesfrombelow.gacha_machine_block": "Gatcha Machine",
   "entity.richesfrombelow.gatcha_ball": "Gatcha Ball",
+  "item.richesfrombelow.all_in": "ALL IN!",
   "item.richesfrombelow.coin_fragment": "Coin Fragment",
+  "item.richesfrombelow.collector_suitcase": "Collector's Suitcase",
+  "item.richesfrombelow.collector_suitcase.tooltip": "Creatures killed may drop some coin fragments.",
+  "item.richesfrombelow.crown_of_greed": "Crown of Greed",
+  "item.richesfrombelow.crown_of_greed.tooltip.gold_consumed": "Value: %s",
+  "item.richesfrombelow.deck_of_fates": "Deck of Fates",
+  "item.richesfrombelow.deck_of_fates.tooltip": "Right click to draw a card",
   "item.richesfrombelow.gatcha_ball_item": "Gatcha Ball",
   "item.richesfrombelow.kobo_coin": "K0BO Coin™",
+  "item.richesfrombelow.pacifist_crown": "Pacifist Crown",
   "item.richesfrombelow.plushie": "Plushie",
   "item.richesfrombelow.plushie.k08": "K08_",
   "item.richesfrombelow.plushie.pattern": "%s Plushie",
-  "itemgroup.riches.riches_items": "Riches from Below"
+  "itemgroup.riches.riches_items": "Riches from Below",
+  "tooltip.richesfrombelow.all_in_item": "Consumes ALL Kobo Coins in inventory."
 }

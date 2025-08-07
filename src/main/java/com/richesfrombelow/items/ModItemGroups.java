@@ -2,11 +2,7 @@ package com.richesfrombelow.items;
 
 import com.richesfrombelow.RichesfromBelow;
 import com.richesfrombelow.block.ModBlocks;
-import com.richesfrombelow.component.ModDataComponents;
-import com.richesfrombelow.component.PlushieVariant;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.CustomModelDataComponent;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -22,18 +18,22 @@ public class ModItemGroups {
                             .displayName(Text.translatable("itemgroup.riches.riches_items"))
                         .entries((displayContext, entries) -> {
 
+                            entries.add(ModItems.COIN_FRAGMENT);
                             entries.add(ModItems.KOBO_COIN);
                             entries.add(ModBlocks.GACHA_MACHINE_BLOCK);
 
-
+                            entries.add(ModItems.CROWN_OF_GREED);
+                            entries.add(ModItems.PACIFIST_CROWN);
+                            entries.add(ModItems.ALL_IN);
+                            entries.add(ModItems.COLLECTOR_SUITCASE);
 
                             //INF PLUSH!!!!
-                            entries.add(ModItems.PLUSHIE);
-
-                            ItemStack k08Plushie = new ItemStack(ModItems.PLUSHIE);
-                            k08Plushie.set(ModDataComponents.PLUSHIE_VARIANT, new PlushieVariant("k08"));
-                            k08Plushie.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(2));
-                            entries.add(k08Plushie);
+//                            entries.add(ModItems.PLUSHIE);
+//
+//                            ItemStack k08Plushie = new ItemStack(ModItems.PLUSHIE);
+//                            k08Plushie.set(ModDataComponents.PLUSHIE_VARIANT, new PlushieVariant("k08"));
+//                            k08Plushie.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(2));
+//                            entries.add(k08Plushie);
                             //INF PLUSH!!!
 
                         }).build());

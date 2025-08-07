@@ -28,5 +28,7 @@ public class RichesfromBelow implements ModInitializer {
 
 		ModDataComponents.register();
 
+
+
 	}
 }
