@@ -2,6 +2,7 @@ package com.richesfrombelow.items;
 
 import com.richesfrombelow.RichesfromBelow;
 import com.richesfrombelow.items.custom.*;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
@@ -35,7 +36,8 @@ public class ModItems {
 
     public static final Item WISHING_STAR = registerItem("wishing_star", new WishingStarItem(new Item.Settings().rarity(Rarity.UNCOMMON).maxCount(16)));
 
-
+    public static final Item FORTUNE_COOKIE = registerItem("fortune_cookie", new FortuneCookieItem(new Item.Settings()
+            .food(new FoodComponent.Builder().nutrition(2).saturationModifier(2f).alwaysEdible().build())));
 
 
     public static final Item PLUSHIE = registerItem("plushie", new PlushieItem(new Item.Settings().equipmentSlot((stack, entity) -> EquipmentSlot.HEAD)));

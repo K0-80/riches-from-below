@@ -53,6 +53,23 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("text.richesfrombelow.wishing_star.success", "Your wish has been granted! You gain %s levels!");
         translationBuilder.add("text.richesfrombelow.wishing_star.failure", "The star fizzles out, draining your experience...");
 
+        translationBuilder.add(ModItems.FORTUNE_COOKIE, "Fortune Cookie");
+        translationBuilder.add("text.richesfrombelow.fortune.1", "Look behind you. Its important.");
+        translationBuilder.add("text.richesfrombelow.fortune.2", "Seek help from professionals trained in mental health care.");
+        translationBuilder.add("text.richesfrombelow.fortune.3", "Your finances will be a key to your financial future");
+        translationBuilder.add("text.richesfrombelow.fortune.4", "Only listen to fortune cookie, disregard all other fortune telling.");
+        translationBuilder.add("text.richesfrombelow.fortune.5", "You are not illiterate.");
+        translationBuilder.add("text.richesfrombelow.fortune.6", "Hes gonna jump u.");
+        translationBuilder.add("text.richesfrombelow.fortune.7", "Don't worry about your future");
+        translationBuilder.add("text.richesfrombelow.fortune.8", "Check the 2nd chest in your base.");
+        translationBuilder.add("text.richesfrombelow.fortune.9", "Maybe the next cookie will give you a fortune...");
+        translationBuilder.add("text.richesfrombelow.fortune.10", "Enjoy while you can!");
+        translationBuilder.add("text.richesfrombelow.fortune.11", "You are not hitting that 1% chance.");
+        translationBuilder.add("text.richesfrombelow.fortune.12", "LOCK IN!");
+        //hihihihihihi
+        translationBuilder.add("text.richesfrombelow.fortune.buff.luck", "you feel unusually lucky!");
+        translationBuilder.add("text.richesfrombelow.fortune.buff.absorption", "a golden energy protects you!");
+        translationBuilder.add("text.richesfrombelow.fortune.treasure", "a great fortune has revealed itself at %s, %s, %s!");
 
 
         translationBuilder.add("item.richesfrombelow.plushie", "Plushie");
