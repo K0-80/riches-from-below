@@ -54,6 +54,7 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("text.richesfrombelow.wishing_star.failure", "The star fizzles out, draining your experience...");
 
         translationBuilder.add(ModItems.FORTUNE_COOKIE, "Fortune Cookie");
+        translationBuilder.add("item.richesfrombelow.fortune_cookie.tooltip", "May contain traces of luck.");
         translationBuilder.add("text.richesfrombelow.fortune.1", "Look behind you. Its important.");
         translationBuilder.add("text.richesfrombelow.fortune.2", "Seek help from professionals trained in mental health care.");
         translationBuilder.add("text.richesfrombelow.fortune.3", "Your finances will be a key to your financial future");
@@ -66,10 +67,12 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("text.richesfrombelow.fortune.10", "Enjoy while you can!");
         translationBuilder.add("text.richesfrombelow.fortune.11", "You are not hitting that 1% chance.");
         translationBuilder.add("text.richesfrombelow.fortune.12", "LOCK IN!");
-        //hihihihihihi
         translationBuilder.add("text.richesfrombelow.fortune.buff.luck", "you feel unusually lucky!");
         translationBuilder.add("text.richesfrombelow.fortune.buff.absorption", "a golden energy protects you!");
         translationBuilder.add("text.richesfrombelow.fortune.treasure", "a great fortune has revealed itself at %s, %s, %s!");
+
+        translationBuilder.add(ModItems.LUCKY_CLOVER, "Lucky Clover");
+
 
 
         translationBuilder.add("item.richesfrombelow.plushie", "Plushie");

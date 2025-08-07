@@ -1,4 +1,4 @@
-// 1.21	2025-08-07T05:23:30.2304115	RichesfromBelow/Model Definitions
+// 1.21	2025-08-07T06:38:07.3188124	RichesfromBelow/Model Definitions
 448826707ccc1b42ef52eba8669dc917f3bae53e assets\richesfrombelow\models\item\kobo_coin.json
 17cd71161018494ef73134bb2d02824dda2ca015 assets\richesfrombelow\models\item\deck_of_fates.json
 6bd848d03a09cb2291dc7529e260913722c62d91 assets\richesfrombelow\models\item\crown_of_greed.json
@@ -8,4 +8,5 @@ a34e487dd91e43f3a6c651e3e1ab71d6070713c8 assets\richesfrombelow\models\item\coll
 5e55185dd20baa1ff2e4be7222932e749166f9c9 assets\richesfrombelow\models\item\wishing_star.json
 70c8abf16086438c931b5120a7296a0319d5e7a3 assets\richesfrombelow\models\item\gatcha_ball_item.json
 9b6e25ccbf4da36c5f534e198766d1217acceed8 assets\richesfrombelow\models\item\fortune_cookie.json
+4837b9d7cabce3d4bd70cfe49954992959904bff assets\richesfrombelow\models\item\lucky_clover.json
 99f8fa7381cde1e54844eba14ed7e6b7f32b8154 assets\richesfrombelow\models\item\all_in.json

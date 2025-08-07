@@ -39,6 +39,8 @@ public class ModItems {
     public static final Item FORTUNE_COOKIE = registerItem("fortune_cookie", new FortuneCookieItem(new Item.Settings()
             .food(new FoodComponent.Builder().nutrition(2).saturationModifier(2f).alwaysEdible().build())));
 
+    public static final Item LUCKY_CLOVER = registerItem("lucky_clover", new Item(new Item.Settings()
+            .rarity(Rarity.EPIC).maxCount(64)));
 
     public static final Item PLUSHIE = registerItem("plushie", new PlushieItem(new Item.Settings().equipmentSlot((stack, entity) -> EquipmentSlot.HEAD)));
 

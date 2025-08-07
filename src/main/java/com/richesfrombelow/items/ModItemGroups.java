@@ -28,6 +28,7 @@ public class ModItemGroups {
                             entries.add(ModItems.COLLECTOR_SUITCASE);
                             entries.add(ModItems.WISHING_STAR);
                             entries.add(ModItems.FORTUNE_COOKIE);
+                            entries.add(ModItems.LUCKY_CLOVER);
 
                             //INF PLUSH!!!!
 //                            entries.add(ModItems.PLUSHIE);

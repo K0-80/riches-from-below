@@ -7,6 +7,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -112,5 +113,11 @@ public class FortuneCookieItem extends Item {
             }
         }
         return false; // Failed to find a suitable spot
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        tooltip.add(Text.translatable("item.richesfrombelow.fortune_cookie.tooltip").formatted(Formatting.GRAY));
+        super.appendTooltip(stack, context, tooltip, type);
     }
 }

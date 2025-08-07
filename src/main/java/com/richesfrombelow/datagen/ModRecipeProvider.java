@@ -6,10 +6,13 @@ import com.richesfrombelow.block.ModBlocks;
 import com.richesfrombelow.items.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Items;
+import net.minecraft.potion.Potions;
+import net.minecraft.recipe.BrewingRecipeRegistry;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
@@ -26,7 +29,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         //K0BO coin
         offerReversibleCompactingRecipes(recipeExporter, RecipeCategory.MISC, ModItems.COIN_FRAGMENT, RecipeCategory.MISC, ModItems.KOBO_COIN);
-
 
         // gacha machine
         ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.GACHA_MACHINE_BLOCK, 1)
