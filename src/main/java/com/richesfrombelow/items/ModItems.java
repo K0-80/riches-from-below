@@ -19,11 +19,12 @@ public class ModItems {
     public static final Item COIN_FRAGMENT = registerItem("coin_fragment", new Item(new Item.Settings().rarity(Rarity.UNCOMMON)));
 
     public static final Item CROWN_OF_GREED = registerItem("crown_of_greed",
-            new CrownOfGreedItem(ModArmorMaterials.CROWN_OF_GREED, ArmorItem.Type.HELMET, new Item.Settings().rarity(Rarity.UNCOMMON).maxCount(1)
+            new CrownOfGreedItem(ModArmorMaterials.CROWN_OF_GREED, ArmorItem.Type.HELMET, new Item.Settings().rarity(Rarity.EPIC).maxCount(1)
             )); //can store gold, when taking damage, drop some gold, more gold stored = become stronger. droped gold has high pickup delay
 
-    public static final Item PACIFIST_CROWN = registerItem("pacifist_crown", new Item(new Item.Settings()
-            .rarity(Rarity.UNCOMMON).maxCount(1)));
+    public static final Item PACIFIST_CROWN = registerItem("pacifist_crown",
+            new PacifistCrownItem(ModArmorMaterials.PACIFIST_CROWN, ArmorItem.Type.HELMET, new Item.Settings().rarity(Rarity.EPIC).maxCount(1)
+            )); //gain reatance 3 and weakness 5 when worn
 
     public static final Item ALL_IN = registerItem("all_in", new AllInItem(new Item.Settings()
             .rarity(Rarity.UNCOMMON).maxCount(4)));

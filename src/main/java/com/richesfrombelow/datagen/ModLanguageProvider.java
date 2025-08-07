@@ -31,6 +31,7 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("item.richesfrombelow.crown_of_greed.tooltip.gold_consumed", "Value: %s");
 
         translationBuilder.add(ModItems.PACIFIST_CROWN, "Pacifist Crown");
+        translationBuilder.add("item.richesfrombelow.pacifist_crown.tooltip", "His greatest victory was the battle he refused to fight.");
 
         translationBuilder.add(ModItems.ALL_IN, "ALL IN!");
         translationBuilder.add("tooltip.richesfrombelow.all_in_item", "Consumes ALL Kobo Coins in inventory.");
