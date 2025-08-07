@@ -26,6 +26,7 @@ public class ModItemGroups {
                             entries.add(ModItems.PACIFIST_CROWN);
                             entries.add(ModItems.ALL_IN);
                             entries.add(ModItems.COLLECTOR_SUITCASE);
+                            entries.add(ModItems.WISHING_STAR);
 
                             //INF PLUSH!!!!
 //                            entries.add(ModItems.PLUSHIE);

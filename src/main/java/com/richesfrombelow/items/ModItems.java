@@ -22,17 +22,20 @@ public class ModItems {
             )); //can store gold, when taking damage, drop some gold, more gold stored = become stronger. droped gold has high pickup delay
 
     public static final Item PACIFIST_CROWN = registerItem("pacifist_crown", new Item(new Item.Settings()
-            .rarity(Rarity.RARE).maxCount(1)));
+            .rarity(Rarity.UNCOMMON).maxCount(1)));
 
     public static final Item ALL_IN = registerItem("all_in", new AllInItem(new Item.Settings()
-            .rarity(Rarity.RARE).maxCount(4)));
+            .rarity(Rarity.UNCOMMON).maxCount(4)));
 
     public static final Item COLLECTOR_SUITCASE = registerItem("collector_suitcase", new CollectorSuitcaseItem(new Item.Settings()
             .rarity(Rarity.UNCOMMON).maxCount(1)));
 
-    public static final Item DECK_OF_FATES = registerItem("deck_of_fates", new DeckOfFatesItem(new Item.Settings()
-            .rarity(Rarity.RARE).maxCount(1)));
+    public static final Item DECK_OF_FATES = registerItem("deck_of_fates", new DeckOfFatesItem(new Item.Settings().rarity(Rarity.UNCOMMON).maxCount(1)));
     public static final Item DECK_OF_FATES_ANIMATION = registerItem("deck_of_fates_animation", new Item(new Item.Settings()));
+
+    public static final Item WISHING_STAR = registerItem("wishing_star", new WishingStarItem(new Item.Settings().rarity(Rarity.UNCOMMON).maxCount(16)));
+
+
 
 
     public static final Item PLUSHIE = registerItem("plushie", new PlushieItem(new Item.Settings().equipmentSlot((stack, entity) -> EquipmentSlot.HEAD)));

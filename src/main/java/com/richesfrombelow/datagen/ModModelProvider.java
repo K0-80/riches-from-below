@@ -27,5 +27,6 @@ public class ModModelProvider extends FabricModelProvider    {
         itemModelGenerator.register(ModItems.ALL_IN, Models.GENERATED);
         itemModelGenerator.register(ModItems.COLLECTOR_SUITCASE, Models.GENERATED);
         itemModelGenerator.register(ModItems.DECK_OF_FATES, Models.GENERATED);
+        itemModelGenerator.register(ModItems.WISHING_STAR, Models.GENERATED);
     }
 }

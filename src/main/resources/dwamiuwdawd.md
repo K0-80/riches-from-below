@@ -15,9 +15,11 @@ king: hero of the village 5 for 10 mins, give 3 ModItems.KOBO_COIN
 empress: grow random flowers on grass blocks in a 10 block radious, spawn a randoom amount of animals in the radious
 star: drop 800xp worth of experance near the player
 
-
 king: hero of the village 5 for 10 mins, drop 3 ModItems.KOBO_COIN on the ground near the player
 sun: regneration 2 and fire restance for 3 mins
 moon: night vision and invisbilty for 5 mins
 devil: grants strgenth 5 for 1 min, deals 50% of health as true damage.
 tower: drops a random item from the inventory on the ground (not including hotbar, offhand or armour) the item has a 10 second pickup delay, lighting will strike the item in 5 seconds
+
+
+Banner of peace: disable ALL DAMAGE in its area

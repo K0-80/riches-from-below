@@ -47,6 +47,13 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("text.richesfrombelow.card.devil", "The Devil: May our contract serve you well.");
         translationBuilder.add("text.richesfrombelow.card.tower", "The Tower: What was built on hubris shall fall to ruin.");
 
+        translationBuilder.add(ModItems.WISHING_STAR, "Wishing Star");
+        translationBuilder.add("tooltip.richesfrombelow.wishing_star.desired_level", "Desired Level: %s");
+        translationBuilder.add("text.richesfrombelow.wishing_star.level_set", "Set to %s Levels");
+        translationBuilder.add("text.richesfrombelow.wishing_star.success", "Your wish has been granted! You gain %s levels!");
+        translationBuilder.add("text.richesfrombelow.wishing_star.failure", "The star fizzles out, draining your experience...");
+
+
 
         translationBuilder.add("item.richesfrombelow.plushie", "Plushie");
         translationBuilder.add(  "item.richesfrombelow.plushie.pattern", "%s Plushie");

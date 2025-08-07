@@ -15,6 +15,7 @@
   "item.richesfrombelow.plushie": "Plushie",
   "item.richesfrombelow.plushie.k08": "K08_",
   "item.richesfrombelow.plushie.pattern": "%s Plushie",
+  "item.richesfrombelow.wishing_star": "Wishing Star",
   "itemgroup.riches.riches_items": "Riches from Below",
   "text.richesfrombelow.card.default": "what the hell how did u even do this??????",
   "text.richesfrombelow.card.devil": "The Devil: May our contract serve you well.",
@@ -22,5 +23,9 @@
   "text.richesfrombelow.card.moon": "The Moon: The night is your guide.",
   "text.richesfrombelow.card.sun": "The Sun: Bask in the light of dawn.",
   "text.richesfrombelow.card.tower": "The Tower: What was built on hubris shall fall to ruin.",
-  "tooltip.richesfrombelow.all_in_item": "Consumes ALL Kobo Coins in inventory."
+  "text.richesfrombelow.wishing_star.failure": "The star fizzles out, draining your experience...",
+  "text.richesfrombelow.wishing_star.level_set": "Set to %s Levels",
+  "text.richesfrombelow.wishing_star.success": "Your wish has been granted! You gain %s levels!",
+  "tooltip.richesfrombelow.all_in_item": "Consumes ALL Kobo Coins in inventory.",
+  "tooltip.richesfrombelow.wishing_star.desired_level": "Desired Level: %s"
 }
