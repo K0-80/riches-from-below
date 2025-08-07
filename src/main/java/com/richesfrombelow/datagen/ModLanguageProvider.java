@@ -73,7 +73,8 @@ public class ModLanguageProvider extends FabricLanguageProvider {
 
         translationBuilder.add(ModItems.LUCKY_CLOVER, "Lucky Clover");
 
-
+        translationBuilder.add(ModItems.LIQUID_GOLD, "Liquid Gold");
+        translationBuilder.add("item.richesfrombelow.liquid_gold.tooltip", "Right click on block to pour");
 
         translationBuilder.add("item.richesfrombelow.plushie", "Plushie");
         translationBuilder.add(  "item.richesfrombelow.plushie.pattern", "%s Plushie");

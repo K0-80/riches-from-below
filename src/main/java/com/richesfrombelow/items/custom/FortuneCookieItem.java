@@ -118,6 +118,5 @@ public class FortuneCookieItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.translatable("item.richesfrombelow.fortune_cookie.tooltip").formatted(Formatting.GRAY));
-        super.appendTooltip(stack, context, tooltip, type);
-    }
+        super.appendTooltip(stack, context, tooltip, type);}
 }

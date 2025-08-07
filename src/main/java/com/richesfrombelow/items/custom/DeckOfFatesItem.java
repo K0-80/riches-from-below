@@ -3,6 +3,7 @@ package com.richesfrombelow.items.custom;
 import com.richesfrombelow.RichesfromBelow;
 import com.richesfrombelow.items.ModItems;
 import com.richesfrombelow.networking.packet.DrawCardS2CPacket;
+import com.richesfrombelow.util.TaskScheduler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -131,7 +132,7 @@ public class DeckOfFatesItem extends Item {
             world.spawnEntity(itemEntity);
 
             Vec3d dropPosition = itemEntity.getPos();
-            RichesfromBelow.scheduleServerTask(100, () -> { // 5 seconds
+            TaskScheduler.schedule(100, () -> { // 5 seconds
                 LightningEntity lightning = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
                 lightning.setPosition(dropPosition);
                 world.spawnEntity(lightning);

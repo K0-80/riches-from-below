@@ -42,6 +42,9 @@ public class ModItems {
     public static final Item LUCKY_CLOVER = registerItem("lucky_clover", new Item(new Item.Settings()
             .rarity(Rarity.EPIC).maxCount(64)));
 
+    public static final Item LIQUID_GOLD = registerItem("liquid_gold", new LiquidGoldItem(new Item.Settings()
+            .rarity(Rarity.UNCOMMON).maxCount(16)));
+
     public static final Item PLUSHIE = registerItem("plushie", new PlushieItem(new Item.Settings().equipmentSlot((stack, entity) -> EquipmentSlot.HEAD)));
 
     private static Item registerItem(String name, Item item) {

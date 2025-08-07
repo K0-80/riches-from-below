@@ -30,5 +30,6 @@ public class ModModelProvider extends FabricModelProvider    {
         itemModelGenerator.register(ModItems.WISHING_STAR, Models.GENERATED);
         itemModelGenerator.register(ModItems.FORTUNE_COOKIE, Models.GENERATED);
         itemModelGenerator.register(ModItems.LUCKY_CLOVER, Models.GENERATED);
+        itemModelGenerator.register(ModItems.LIQUID_GOLD, Models.GENERATED);
     }
 }
