@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "richesfrombelow:item/deck_of_fates_animation/fallback"
+  },
+  "overrides": [
+    { "predicate": { "custom_model_data": 0 }, "model": "richesfrombelow:item/deck_of_fates_animation/moon" },
+    { "predicate": { "custom_model_data": 1 }, "model": "richesfrombelow:item/deck_of_fates_animation/sun" },
+    { "predicate": { "custom_model_data": 2 }, "model": "richesfrombelow:item/deck_of_fates_animation/king" },
+    { "predicate": { "custom_model_data": 3 }, "model": "richesfrombelow:item/deck_of_fates_animation/tower" },
+    { "predicate": { "custom_model_data": 4 }, "model": "richesfrombelow:item/deck_of_fates_animation/devil" }
+  ]
+}
+

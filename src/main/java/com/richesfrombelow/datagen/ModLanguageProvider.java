@@ -40,7 +40,12 @@ public class ModLanguageProvider extends FabricLanguageProvider {
 
         translationBuilder.add(ModItems.DECK_OF_FATES, "Deck of Fates");
         translationBuilder.add("item.richesfrombelow.deck_of_fates.tooltip", "Right click to draw a card");
-
+        translationBuilder.add("text.richesfrombelow.card.default", "what the hell how did u even do this??????");
+        translationBuilder.add("text.richesfrombelow.card.king", "The King: Your reign begins. The realm provides for its ruler.");
+        translationBuilder.add("text.richesfrombelow.card.sun", "The Sun: Bask in the light of dawn.");
+        translationBuilder.add("text.richesfrombelow.card.moon", "The Moon: The night is your guide.");
+        translationBuilder.add("text.richesfrombelow.card.devil", "The Devil: May our contract serve you well.");
+        translationBuilder.add("text.richesfrombelow.card.tower", "The Tower: What was built on hubris shall fall to ruin.");
 
 
         translationBuilder.add("item.richesfrombelow.plushie", "Plushie");

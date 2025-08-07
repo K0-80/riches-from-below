@@ -32,6 +32,7 @@ public class ModItems {
 
     public static final Item DECK_OF_FATES = registerItem("deck_of_fates", new DeckOfFatesItem(new Item.Settings()
             .rarity(Rarity.RARE).maxCount(1)));
+    public static final Item DECK_OF_FATES_ANIMATION = registerItem("deck_of_fates_animation", new Item(new Item.Settings()));
 
 
     public static final Item PLUSHIE = registerItem("plushie", new PlushieItem(new Item.Settings().equipmentSlot((stack, entity) -> EquipmentSlot.HEAD)));
