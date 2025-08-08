@@ -1,49 +1,70 @@
 package com.richesfrombelow.util;
 
-import net.minecraft.server.MinecraftServer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TaskScheduler {
-    private static final List<Task> PENDING_TASKS = new ArrayList<>();
+    private static final List<ScheduledTask> tasks = new CopyOnWriteArrayList<>();
 
-    public static void schedule(int delayTicks, Runnable action) {
-        PENDING_TASKS.add(new Task(delayTicks, action));
+    public static void initialize() {
+        ServerTickEvents.END_SERVER_TICK.register(server -> tick());
     }
 
-    public static void tick(MinecraftServer server) {
-        for (Iterator<Task> iterator = PENDING_TASKS.iterator(); iterator.hasNext(); ) {
-            Task task = iterator.next();
-            task.tick();
-            if (task.isFinished()) {
-                // Using server.execute makes sure the task runs on the main server thread
-                server.execute(task::run);
-                iterator.remove();
+    public static void schedule(int delayTicks, Runnable task) {
+        tasks.add(new ScheduledTask(delayTicks, task));
+    }
+
+    private static void tick() {
+        if (tasks.isEmpty()) {
+            return;
+        }
+
+        List<ScheduledTask> tasksToRemove = new ArrayList<>();
+        List<ScheduledTask> tasksToRun = new ArrayList<>();
+
+        for (ScheduledTask task : tasks) {
+            task.decrementDelay();
+            if (task.getDelay() <= 0) {
+                tasksToRun.add(task);
+                tasksToRemove.add(task);
             }
         }
+
+        // Remove completed tasks
+        if (!tasksToRemove.isEmpty()) {
+            tasks.removeAll(tasksToRemove);
+        }
+
+        // Execute the tasks that are due.
+        // This is done *after* iteration and removal to prevent ConcurrentModificationException
+        // if a task schedules another task.
+        for (ScheduledTask task : tasksToRun) {
+            task.getRunnable().run();
+        }
     }
 
-    private static class Task {
-        private int delayTicks;
-        private final Runnable action;
+    private static class ScheduledTask {
+        private int delay;
+        private final Runnable runnable;
 
-        Task(int delayTicks, Runnable action) {
-            this.delayTicks = delayTicks;
-            this.action = action;
+        public ScheduledTask(int delay, Runnable runnable) {
+            this.delay = delay;
+            this.runnable = runnable;
         }
 
-        public void tick() {
-            this.delayTicks--;
+        public int getDelay() {
+            return delay;
         }
 
-        public boolean isFinished() {
-            return this.delayTicks <= 0;
+        public Runnable getRunnable() {
+            return runnable;
         }
 
-        public void run() {
-            this.action.run();
+        public void decrementDelay() {
+            this.delay--;
         }
     }
 }

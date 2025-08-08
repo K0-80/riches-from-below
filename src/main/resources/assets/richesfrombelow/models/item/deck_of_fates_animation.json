@@ -8,7 +8,10 @@
     { "predicate": { "custom_model_data": 1 }, "model": "richesfrombelow:item/deck_of_fates_animation/sun" },
     { "predicate": { "custom_model_data": 2 }, "model": "richesfrombelow:item/deck_of_fates_animation/king" },
     { "predicate": { "custom_model_data": 3 }, "model": "richesfrombelow:item/deck_of_fates_animation/tower" },
-    { "predicate": { "custom_model_data": 4 }, "model": "richesfrombelow:item/deck_of_fates_animation/devil" }
+    { "predicate": { "custom_model_data": 4 }, "model": "richesfrombelow:item/deck_of_fates_animation/devil" },
+    { "predicate": { "custom_model_data": 5 }, "model": "richesfrombelow:item/deck_of_fates_animation/hanged_man" },
+    { "predicate": { "custom_model_data": 6 }, "model": "richesfrombelow:item/deck_of_fates_animation/empress" },
+    { "predicate": { "custom_model_data": 100 }, "model": "richesfrombelow:item/deck_of_fates_animation/fallback" }
   ]
 }
 

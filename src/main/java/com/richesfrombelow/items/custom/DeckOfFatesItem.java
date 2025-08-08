@@ -7,9 +7,12 @@ import com.richesfrombelow.util.TaskScheduler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.CustomModelDataComponent;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LightningEntity;
@@ -28,7 +31,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -38,8 +43,8 @@ import java.util.List;
 public class DeckOfFatesItem extends Item {
 
     private enum Card {
-        MOON, SUN, KING, TOWER, DEVIL
-    }
+        MOON, SUN, KING, TOWER, DEVIL, HANGED_MAN, EMPRESS
+        }
 
     public DeckOfFatesItem(Settings settings) {
         super(settings);
@@ -49,7 +54,8 @@ public class DeckOfFatesItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
 
-        user.getItemCooldownManager().set(this, 20 * 60 * 5);
+//        user.getItemCooldownManager().set(this, 20 * 60 * 5);
+        user.getItemCooldownManager().set(this, 3* 20);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.PLAYERS, 2F, 2F);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.PLAYERS, 2F, 2F);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.PLAYERS, 2F, 2F);
@@ -63,8 +69,9 @@ public class DeckOfFatesItem extends Item {
             Card[] cards = Card.values();
             Card drawnCard = cards[world.getRandom().nextInt(cards.length)];
 
-            RichesfromBelow.LOGGER.info("{} drew the '{}' card", user.getName().getString(), drawnCard.name());
-            applyCardEffect(serverWorld, user, drawnCard);
+            TaskScheduler.schedule(30, () -> { //delay for animation to do its thing :))
+                applyCardEffect(serverWorld, user, drawnCard);
+            });
 
             ServerPlayNetworking.send((ServerPlayerEntity) user, new DrawCardS2CPacket(drawnCard.ordinal()));
         }
@@ -108,14 +115,26 @@ public class DeckOfFatesItem extends Item {
                 handleTowerEffect(world, user);
                 message = Text.translatable("text.richesfrombelow.card.tower").formatted(Formatting.RED);
             }
+            case HANGED_MAN -> {
+                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 200, 2)); // 10 seconds
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 200, 0)); // 10 seconds
+                message = Text.translatable("text.richesfrombelow.card.hanged_man").formatted(Formatting.DARK_GRAY);
+            }
+            case EMPRESS -> {
+                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BONE_MEAL_USE, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ALLAY_AMBIENT_WITHOUT_ITEM, SoundCategory.PLAYERS, 1.0f, 1.2f);
+                handleEmpressEffect(world, user);
+                message = Text.translatable("text.richesfrombelow.card.empress").formatted(Formatting.LIGHT_PURPLE);
+            }
         }
-        user.sendMessage(message, true); // Send the message to the action bar
+        user.sendMessage(message, true);
     }
 
     private void handleTowerEffect(ServerWorld world, PlayerEntity user) {
         Inventory inventory = user.getInventory();
         List<Integer> validSlots = new ArrayList<>();
-        for (int i = 9; i < 36; i++) { // Main inventory, no hotbar
+        for (int i = 9; i < 36; i++) { //only works for inv
             if (!inventory.getStack(i).isEmpty()) {
                 validSlots.add(i);
             }
@@ -123,7 +142,7 @@ public class DeckOfFatesItem extends Item {
 
         if (!validSlots.isEmpty()) {
             Collections.shuffle(validSlots);
-            int slotToDrop = validSlots.get(0);
+            int slotToDrop = validSlots.getFirst();
             ItemStack stackToDrop = inventory.getStack(slotToDrop).copy();
             inventory.setStack(slotToDrop, ItemStack.EMPTY);
 
@@ -140,29 +159,47 @@ public class DeckOfFatesItem extends Item {
         }
     }
 
-    @Environment(EnvType.CLIENT)
-    public static void drawCardAnimation(int cardId) {
-        ItemStack cardStack = new ItemStack(ModItems.DECK_OF_FATES_ANIMATION);
-        cardStack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(cardId));
+    private void handleEmpressEffect(ServerWorld world, PlayerEntity user) {
+        BlockPos center = user.getBlockPos();
+        int radius = 10;
 
-        MinecraftClient.getInstance().gameRenderer.showFloatingItem(cardStack);
+        List<Block> flowers = List.of(
+                Blocks.POPPY, Blocks.DANDELION, Blocks.BLUE_ORCHID, Blocks.ALLIUM,
+                Blocks.AZURE_BLUET, Blocks.RED_TULIP, Blocks.ORANGE_TULIP, Blocks.WHITE_TULIP,
+                Blocks.PINK_TULIP, Blocks.OXEYE_DAISY, Blocks.CORNFLOWER, Blocks.LILY_OF_THE_VALLEY
+        );
 
-        String cardName = getCardNameById(cardId);
-        PlayerEntity player = MinecraftClient.getInstance().player;
-        if (player != null) {
-            RichesfromBelow.LOGGER.info("Animating '{}' card (ID: {}) for {}", cardName, cardId, player.getName().getString());
+        for (BlockPos pos : BlockPos.iterate(center.add(-radius, -radius, -radius), center.add(radius, radius, radius))) {
+            if (world.getBlockState(pos).isOf(Blocks.GRASS_BLOCK) && world.isAir(pos.up())) {
+                if (world.random.nextInt(5) == 0) { // 20% chance per grass block
+                    Block flowerBlock = flowers.get(world.random.nextInt(flowers.size()));
+                    world.setBlockState(pos.up(), flowerBlock.getDefaultState(), 3);
+                }
+            }
         }
-    }
 
-    private static String getCardNameById(int id) {
-        return switch (id) {
-            case 0 -> "Moon";
-            case 1 -> "Sun";
-            case 2 -> "King";
-            case 3 -> "Tower";
-            case 4 -> "Devil";
-            default -> "Unknown";
-        };
+        List<EntityType<?>> animals = List.of(
+                EntityType.COW, EntityType.PIG, EntityType.SHEEP, EntityType.CHICKEN,
+                EntityType.RABBIT, EntityType.FOX
+        );
+
+        int animalCount = world.random.nextInt(3) + 4; // 2 to 4 animals
+
+        for (int i = 0; i < animalCount; i++) {
+            int x = center.getX() + world.random.nextInt(radius * 2 + 1) - radius;
+            int z = center.getZ() + world.random.nextInt(radius * 2 + 1) - radius;
+
+            BlockPos spawnPos = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, new BlockPos(x, world.getHeight(), z));
+
+            if (world.getBlockState(spawnPos.down()).isSolid()) {
+                EntityType<?> animalType = animals.get(world.random.nextInt(animals.size()));
+                Entity animal = animalType.create(world);
+                if (animal != null) {
+                    animal.refreshPositionAndAngles(spawnPos.getX() + 0.5, spawnPos.getY(), spawnPos.getZ() + 0.5, world.random.nextFloat() * 360.0F, 0.0F);
+                    world.spawnEntity(animal);
+                }
+            }
+        }
     }
 
 

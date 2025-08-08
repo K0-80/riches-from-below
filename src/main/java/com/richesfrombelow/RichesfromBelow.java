@@ -10,7 +10,6 @@ import com.richesfrombelow.items.ModItems;
 import com.richesfrombelow.util.ModLootTableModifiers;
 import com.richesfrombelow.util.TaskScheduler;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.potion.Potions;
 import org.slf4j.Logger;
@@ -35,12 +34,12 @@ public class RichesfromBelow implements ModInitializer {
 
 		ModLootTableModifiers.modifyLootTables();
 
+
 		ModCommands.registerCommands();
+		TaskScheduler.initialize();
 
 		FabricBrewingRecipeRegistryBuilder.BUILD.register((builder -> { //potions
 			builder.registerPotionRecipe(Potions.AWKWARD, ModItems.LUCKY_CLOVER, Potions.LUCK);
 		}));
-
-		ServerTickEvents.END_SERVER_TICK.register(TaskScheduler::tick);
 	}
 }

@@ -1,6 +1,6 @@
 package com.richesfrombelow.networking;
 
-import com.richesfrombelow.items.custom.DeckOfFatesItem;
+import com.richesfrombelow.RichesfromBelowClient;
 import com.richesfrombelow.networking.packet.DrawCardS2CPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
@@ -11,7 +11,7 @@ public class ModPackets {
 
         ClientPlayNetworking.registerGlobalReceiver(DrawCardS2CPacket.ID, (payload, context) -> {
             context.client().execute(() -> {
-                DeckOfFatesItem.drawCardAnimation(payload.cardId());
+                RichesfromBelowClient.drawCardAnimation(payload.cardId());
             });
         });
     }
