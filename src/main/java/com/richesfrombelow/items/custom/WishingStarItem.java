@@ -72,8 +72,6 @@ public class WishingStarItem extends Item {
     }
 
 
-
-
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         int level = stack.getOrDefault(ModDataComponents.WISHING_LEVEL, 0);

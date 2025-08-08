@@ -21,6 +21,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.CustomModelDataComponent;
 import net.minecraft.item.ItemStack;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 
 public class RichesfromBelowClient implements ClientModInitializer {
     @Override
@@ -29,6 +30,7 @@ public class RichesfromBelowClient implements ClientModInitializer {
         ModPackets.registerS2CPackets();
         ClientTickEvents.END_CLIENT_TICK.register(client -> DeckOfFatesAnimationRenderer.tick());
         HudRenderCallback.EVENT.register((drawContext, renderTickCounter) -> DeckOfFatesAnimationRenderer.render(drawContext, renderTickCounter.getTickDelta(true)));
+
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.GATCHA_BALL, GatchaBallModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.GATCHA_BALL, GatchaBallRenderer::new);
 
@@ -41,5 +43,7 @@ public class RichesfromBelowClient implements ClientModInitializer {
         ItemStack cardStack = new ItemStack(ModItems.DECK_OF_FATES_ANIMATION);
         cardStack.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(cardId));
         DeckOfFatesAnimationRenderer.showAnimation(cardStack);
+
+
     }
 }

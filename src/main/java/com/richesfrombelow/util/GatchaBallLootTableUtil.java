@@ -1,13 +1,8 @@
 package com.richesfrombelow.util;
 
 import com.richesfrombelow.items.ModItems;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.random.Random;
 
 
@@ -110,7 +105,7 @@ public class GatchaBallLootTableUtil {
                 //                () -> createRandomEnchantedBook(random, 2)
                 () -> new ItemStack(ModItems.COIN_FRAGMENT, random.nextInt(2) + 5),
                 () -> new ItemStack(ModItems.COLLECTOR_SUITCASE, 1),
-                () -> new ItemStack(ModItems.WISHING_STAR, random.nextInt(2) + 2),
+                () -> new ItemStack(ModItems.WISHING_STAR, random.nextInt(2) + 3),
                 () -> new ItemStack(ModItems.LIQUID_GOLD, random.nextInt(2) + 2),
                 () -> new ItemStack(Items.DIAMOND, random.nextInt(3) + 3), // 3-5
                 () -> new ItemStack(Items.GOLDEN_APPLE, random.nextInt(2) + 1), // 1-2
