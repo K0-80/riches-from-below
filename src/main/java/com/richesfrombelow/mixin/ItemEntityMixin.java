@@ -38,46 +38,46 @@ public abstract class ItemEntityMixin extends Entity {
     }
 
 
-    @Inject(method = "tick", at = @At("TAIL"))
-    private void onTick(CallbackInfo ci) {
-        if (this.getWorld().isClient) {
-            return;
-        }
-
-        ItemStack stack = this.getStack();
-        if (!stack.isOf(ModItems.WISHING_STAR) || !this.isTouchingWater() || !stack.contains(ModDataComponents.WISHING_STAR_OWNER)) {
-            return;
-        }
-
-        UUID ownerUuid = stack.get(ModDataComponents.WISHING_STAR_OWNER);
-
-        if (ownerUuid != null) {
-            PlayerEntity player = this.getWorld().getPlayerByUuid(ownerUuid);
-            if (player instanceof ServerPlayerEntity serverPlayer) {
-                int desiredLevel = stack.getOrDefault(ModDataComponents.WISHING_LEVEL, 1);
-                ServerWorld serverWorld = (ServerWorld) this.getWorld();
-
-                // higher level = lower chance
-                // Level 1: ~97% | Level 15: ~57% | Level 30: ~14%
-                double successChance = 1.0 - (desiredLevel / 35.0);
-
-                if (serverWorld.getRandom().nextFloat() < successChance) {
-                    serverPlayer.addExperienceLevels(desiredLevel);
-                    serverPlayer.sendMessage(Text.translatable("text.richesfrombelow.wishing_star.success", desiredLevel).formatted(Formatting.GOLD), true);
-                    serverWorld.playSound(null, this.getBlockPos(), SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
-                    serverWorld.spawnParticles(ParticleTypes.HAPPY_VILLAGER, this.getX(), this.getY() + 0.5, this.getZ(), 20, 0.5, 0.5, 0.5, 0.1);
-                } else {
-                    serverPlayer.setExperienceLevel(0);
-                    serverPlayer.setExperiencePoints(0);
-                    serverPlayer.sendMessage(Text.translatable("text.richesfrombelow.wishing_star.failure").formatted(Formatting.RED), true);
-                    serverWorld.playSound(null, this.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.PLAYERS, 1.0f, 1.0f);
-                    serverWorld.spawnParticles(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5, this.getZ(), 20, 0.5, 0.5, 0.5, 0.1);
-                }
-
-                this.discard();
-            }
-        }
-    }
+//    @Inject(method = "tick", at = @At("TAIL"))
+//    private void onTick(CallbackInfo ci) {
+//        if (this.getWorld().isClient) {
+//            return;
+//        }
+//
+//        ItemStack stack = this.getStack();
+//        if (!stack.isOf(ModItems.WISHING_STAR) || !this.isTouchingWater() || !stack.contains(ModDataComponents.WISHING_STAR_OWNER)) {
+//            return;
+//        }
+//
+//        UUID ownerUuid = stack.get(ModDataComponents.WISHING_STAR_OWNER);
+//
+//        if (ownerUuid != null) {
+//            PlayerEntity player = this.getWorld().getPlayerByUuid(ownerUuid);
+//            if (player instanceof ServerPlayerEntity serverPlayer) {
+//                int desiredLevel = stack.getOrDefault(ModDataComponents.WISHING_LEVEL, 1);
+//                ServerWorld serverWorld = (ServerWorld) this.getWorld();
+//
+//                // higher level = lower chance
+//                // Level 1: ~97% | Level 15: ~57% | Level 30: ~14%
+//                double successChance = 1.0 - (desiredLevel / 35.0);
+//
+//                if (serverWorld.getRandom().nextFloat() < successChance) {
+//                    serverPlayer.addExperienceLevels(desiredLevel);
+//                    serverPlayer.sendMessage(Text.translatable("text.richesfrombelow.wishing_star.success", desiredLevel).formatted(Formatting.GOLD), true);
+//                    serverWorld.playSound(null, this.getBlockPos(), SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
+//                    serverWorld.spawnParticles(ParticleTypes.HAPPY_VILLAGER, this.getX(), this.getY() + 0.5, this.getZ(), 20, 0.5, 0.5, 0.5, 0.1);
+//                } else {
+//                    serverPlayer.setExperienceLevel(0);
+//                    serverPlayer.setExperiencePoints(0);
+//                    serverPlayer.sendMessage(Text.translatable("text.richesfrombelow.wishing_star.failure").formatted(Formatting.RED), true);
+//                    serverWorld.playSound(null, this.getBlockPos(), SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.PLAYERS, 1.0f, 1.0f);
+//                    serverWorld.spawnParticles(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5, this.getZ(), 20, 0.5, 0.5, 0.5, 0.1);
+//                }
+//
+//                this.discard();
+//            }
+//        }
+//    }
 
     @Inject(method = "onPlayerCollision", at = @At("HEAD"), cancellable = true)
     private void richesfrombelow$onPlayerCollision(PlayerEntity player, CallbackInfo ci) {

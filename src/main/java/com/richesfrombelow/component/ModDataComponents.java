@@ -25,11 +25,7 @@ public class ModDataComponents {
 
     public static final ComponentType<Integer> WISHING_LEVEL  =
             register("wishing_level", builder -> builder.codec(Codec.INT));
-    public static final ComponentType<UUID> WISHING_STAR_OWNER = Registry.register(
-            Registries.DATA_COMPONENT_TYPE,
-            Identifier.of(RichesfromBelow.MOD_ID, "wishing_star_owner"),
-            ComponentType.<UUID>builder().codec(Uuids.CODEC).packetCodec(Uuids.PACKET_CODEC).build()
-    );
+
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(RichesfromBelow.MOD_ID, name),
