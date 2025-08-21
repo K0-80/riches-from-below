@@ -21,6 +21,7 @@ public class ModItemGroups {
                             entries.add(ModItems.COIN_FRAGMENT);
                             entries.add(ModItems.KOBO_COIN);
                             entries.add(ModBlocks.GACHA_MACHINE_BLOCK);
+                            entries.add(ModBlocks.SLOT_MACHINE);
 
                             entries.add(ModItems.CROWN_OF_GREED);
                             entries.add(ModItems.PACIFIST_CROWN);

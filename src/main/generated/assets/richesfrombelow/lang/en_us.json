@@ -5,6 +5,7 @@
   "block.richesfrombelow.personal_vault.time_extended": "Lock time extend to %s hours, %s minutes.",
   "block.richesfrombelow.personal_vault.time_remaining": "Locked for %s hours, %s minutes.",
   "block.richesfrombelow.personal_vault.unlocked": "Vault is unlocked.",
+  "block.richesfrombelow.slot_machine": "Slot Machine",
   "entity.richesfrombelow.gatcha_ball": "Gatcha Ball",
   "item.richesfrombelow.all_in": "ALL IN!",
   "item.richesfrombelow.coin_fragment": "Coin Fragment",

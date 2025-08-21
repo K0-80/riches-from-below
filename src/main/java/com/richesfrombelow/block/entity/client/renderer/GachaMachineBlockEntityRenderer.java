@@ -1,4 +1,4 @@
-package com.richesfrombelow.block.entity.client;
+package com.richesfrombelow.block.entity.client.renderer;
 
 import com.richesfrombelow.block.GachaMachineBlock;
 import com.richesfrombelow.block.entity.GachaMachineBlockEntity;

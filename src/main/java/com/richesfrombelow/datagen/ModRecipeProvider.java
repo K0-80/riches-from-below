@@ -31,7 +31,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerReversibleCompactingRecipes(recipeExporter, RecipeCategory.MISC, ModItems.COIN_FRAGMENT, RecipeCategory.MISC, ModItems.KOBO_COIN);
 
         // gacha machine
-        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.GACHA_MACHINE_BLOCK, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.GACHA_MACHINE_BLOCK, 1)
                 .pattern("GG ")
                 .pattern("GR ")
                 .pattern("II ")
@@ -40,5 +40,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('R', Items.REDSTONE_BLOCK)
                 .criterion(hasItem(Items.IRON_BLOCK), conditionsFromItem(Items.IRON_BLOCK))
                 .offerTo(recipeExporter, RecipeProvider.getRecipeName(ModBlocks.GACHA_MACHINE_BLOCK));
+
+        //slot machine
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.SLOT_MACHINE, 1)
+                .pattern("IG ")
+                .pattern("IL ")
+                .pattern("II ")
+                .input('I', Items.IRON_BLOCK)
+                .input('G', Items.GOLD_BLOCK)
+                .input('L', Items.LEVER)
+                .criterion(hasItem(Items.IRON_BLOCK), conditionsFromItem(Items.IRON_BLOCK))
+                .criterion(hasItem(Items.GOLD_BLOCK), conditionsFromItem(Items.GOLD_BLOCK))
+                .offerTo(recipeExporter, RecipeProvider.getRecipeName(ModBlocks.SLOT_MACHINE));
     }
 }

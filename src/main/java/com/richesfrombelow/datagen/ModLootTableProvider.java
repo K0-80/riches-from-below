@@ -34,8 +34,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-       addDrop(ModBlocks.GACHA_MACHINE_BLOCK);
-       addDrop(ModBlocks.PERSONAL_VAULT);
+        addDrop(ModBlocks.GACHA_MACHINE_BLOCK);
+        addDrop(ModBlocks.SLOT_MACHINE);
+        addDrop(ModBlocks.PERSONAL_VAULT);
     }
 
     public LootTable.Builder multipleOreDrops(Block drop, Item item, float minDrops, float maxDrops) {

@@ -1,7 +1,9 @@
-// 1.21	2025-08-21T15:21:52.0600056	RichesfromBelow/Recipes
-0ac02ca0f2e44a130aaf6203c9b364ddb24bd37b data\richesfrombelow\advancement\recipes\redstone\gacha_machine_block.json
-8fc259651132ee93a6eb17a61f1a55e94bce17da data\richesfrombelow\recipe\gacha_machine_block.json
+// 1.21	2025-08-21T17:01:00.6497847	RichesfromBelow/Recipes
+63b045a57435d49eb54c084e6fd5dd0a49ba1062 data\richesfrombelow\advancement\recipes\decorations\slot_machine.json
+b22c0a306eafaa177a5bc841a907d65a57896855 data\richesfrombelow\recipe\gacha_machine_block.json
 c35a99fc7069a230b6c62e550bd888313f03444c data\richesfrombelow\recipe\coin_fragment.json
+0ac02ca0f2e44a130aaf6203c9b364ddb24bd37b data\richesfrombelow\advancement\recipes\decorations\gacha_machine_block.json
 6928d00b7d82eb8736bdb7b6e956ec1f65099726 data\richesfrombelow\advancement\recipes\misc\coin_fragment.json
 d79dcfe2b5dfce31652862d7b20140e995b25372 data\richesfrombelow\advancement\recipes\misc\kobo_coin.json
 dc5e7fc431a5d645379f651c7d17684096fe6d06 data\richesfrombelow\recipe\kobo_coin.json
+0a0c71a9ecd03823c297bd172ae1d14d1f8598d4 data\richesfrombelow\recipe\slot_machine.json

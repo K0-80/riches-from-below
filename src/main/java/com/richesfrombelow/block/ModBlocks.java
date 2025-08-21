@@ -17,8 +17,13 @@ public class ModBlocks {
     public static final Block GACHA_MACHINE_BLOCK = registerBlock("gacha_machine_block",
             new GachaMachineBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().requiresTool().luminance(state -> 10)));
 
+    public static final Block SLOT_MACHINE = registerBlock("slot_machine",
+            new SlotMachineBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().requiresTool().luminance(state -> 10)));
+
     public static final Block PERSONAL_VAULT = registerBlock("personal_vault",
             new PersonalVaultBlock(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).sounds(BlockSoundGroup.VAULT)));
+
+
 
 
     // Helper for blocks with a standard item

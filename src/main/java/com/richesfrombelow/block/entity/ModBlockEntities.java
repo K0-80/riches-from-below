@@ -13,6 +13,10 @@ public class ModBlockEntities {
             Identifier.of(RichesfromBelow.MOD_ID, "gacha_machine_be"),
             BlockEntityType.Builder.create(GachaMachineBlockEntity::new, ModBlocks.GACHA_MACHINE_BLOCK).build(null));
 
+    public static final BlockEntityType<SlotMachineBlockEntity> SLOT_MACHINE  = Registry.register(Registries.BLOCK_ENTITY_TYPE,
+            Identifier.of(RichesfromBelow.MOD_ID, "slot_machine_be"),
+            BlockEntityType.Builder.create(SlotMachineBlockEntity::new, ModBlocks.SLOT_MACHINE).build(null));
+
     public static final BlockEntityType<PersonalVaultBlockEntity> PERSONAL_VAULT_BLOCK_ENTITY = Registry.register(Registries.BLOCK_ENTITY_TYPE,
             Identifier.of(RichesfromBelow.MOD_ID, "personal_vault_be"),
             BlockEntityType.Builder.create(PersonalVaultBlockEntity::new, ModBlocks.PERSONAL_VAULT).build(null));

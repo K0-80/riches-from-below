@@ -1,0 +1,7 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "richesfrombelow:block/slot_machine" }
+    }
+  ]
+}

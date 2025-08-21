@@ -19,11 +19,13 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         //needs pickxaxe
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
                 .add(ModBlocks.GACHA_MACHINE_BLOCK)
+                .add(ModBlocks.SLOT_MACHINE)
                 .add(ModBlocks.PERSONAL_VAULT);
 
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.GACHA_MACHINE_BLOCK)
+                .add(ModBlocks.SLOT_MACHINE)
                 .add(ModBlocks.PERSONAL_VAULT);
 
     }

@@ -42,14 +42,19 @@ public class GachaMachineBlockEntity extends BlockEntity {
             if (!world.isClient()) {
                 int remainingTicks = be.activationTicks;
                 int totalTicks = be.totalAnimationTicks;
-
-                if (totalTicks > 0 && remainingTicks > 5) {
+                int ticksPassed = totalTicks - remainingTicks;
+                final int SOUND_DELAY_TICKS = 10;
+                if (totalTicks > 0 && remainingTicks > 5 && ticksPassed >= SOUND_DELAY_TICKS) {
                     if (remainingTicks % 3 == 0) {
-                        float progress = (float)(totalTicks - remainingTicks) / (float)totalTicks;
-                        float grindstonePitch = 0.8f + (1.0f * progress);
-                        world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS, 0.5f, grindstonePitch);
-                        float bitPitch = 0.4f + (1.0f * progress);
-                        world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_NOTE_BLOCK_BIT, SoundCategory.BLOCKS, 0.4f, bitPitch);
+                        int soundPhaseDuration = totalTicks - SOUND_DELAY_TICKS;
+                        int ticksIntoSoundPhase = ticksPassed - SOUND_DELAY_TICKS;
+                        if (soundPhaseDuration > 0) {
+                            float progress = (float) ticksIntoSoundPhase / (float) soundPhaseDuration;
+                            float grindstonePitch = 0.8f + (1.0f * progress);
+                            world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS, 0.3f, grindstonePitch);
+                            float bitPitch = 0.4f + (1.0f * progress);
+                            world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_NOTE_BLOCK_BIT, SoundCategory.BLOCKS, 0.4f, bitPitch);
+                        }
                     }
                 }
             }
