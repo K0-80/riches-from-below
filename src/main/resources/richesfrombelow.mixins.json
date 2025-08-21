@@ -5,7 +5,8 @@
   "mixins": [
     "ItemEntityMixin",
     "LivingEntityMixin",
-    "PlayerEntityDamageMixin"
+    "PlayerEntityDamageMixin",
+    "VaultBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

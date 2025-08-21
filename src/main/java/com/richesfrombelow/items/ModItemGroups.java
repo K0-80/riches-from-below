@@ -31,6 +31,8 @@ public class ModItemGroups {
                             entries.add(ModItems.LUCKY_CLOVER);
                             entries.add(ModItems.LIQUID_GOLD);
 
+//                            entries.add(ModBlocks.PERSONAL_VAULT);
+
                             //INF PLUSH!!!!
 //                            entries.add(ModItems.PLUSHIE);
 //

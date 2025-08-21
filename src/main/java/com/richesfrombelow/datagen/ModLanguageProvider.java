@@ -79,6 +79,12 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.LIQUID_GOLD, "Liquid Gold");
         translationBuilder.add("item.richesfrombelow.liquid_gold.tooltip", "Right click on block to pour");
 
+        translationBuilder.add(ModBlocks.PERSONAL_VAULT, "Personal Vault");
+        translationBuilder.add("block.richesfrombelow.personal_vault.locked_by", "Vault is owned by %s.");
+        translationBuilder.add("block.richesfrombelow.personal_vault.time_remaining", "Locked for %s hours, %s minutes.");
+        translationBuilder.add("block.richesfrombelow.personal_vault.time_extended", "Lock time extend to %s hours, %s minutes.");
+        translationBuilder.add("block.richesfrombelow.personal_vault.unlocked", "Vault is unlocked.");
+
         translationBuilder.add("item.richesfrombelow.plushie", "Plushie");
         translationBuilder.add(  "item.richesfrombelow.plushie.pattern", "%s Plushie");
         translationBuilder.add("item.richesfrombelow.plushie.k08", "K08_");

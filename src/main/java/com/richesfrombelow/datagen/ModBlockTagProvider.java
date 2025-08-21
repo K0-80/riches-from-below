@@ -18,10 +18,13 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         //needs pickxaxe
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.GACHA_MACHINE_BLOCK);
+                .add(ModBlocks.GACHA_MACHINE_BLOCK)
+                .add(ModBlocks.PERSONAL_VAULT);
+
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.GACHA_MACHINE_BLOCK);
+                .add(ModBlocks.GACHA_MACHINE_BLOCK)
+                .add(ModBlocks.PERSONAL_VAULT);
 
     }
 }

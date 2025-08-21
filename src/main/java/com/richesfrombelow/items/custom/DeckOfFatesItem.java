@@ -54,8 +54,8 @@ public class DeckOfFatesItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
 
-//        user.getItemCooldownManager().set(this, 20 * 60 * 5);
-        user.getItemCooldownManager().set(this, 3* 20);
+        user.getItemCooldownManager().set(this, 20 * 60 * 5);
+//        user.getItemCooldownManager().set(this, 3* 20);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.PLAYERS, 2F, 2F);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.PLAYERS, 2F, 2F);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_BOOK_PAGE_TURN, SoundCategory.PLAYERS, 2F, 2F);

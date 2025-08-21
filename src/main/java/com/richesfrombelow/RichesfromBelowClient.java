@@ -37,6 +37,8 @@ public class RichesfromBelowClient implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.GACHA_MACHINE_BLOCK_ENTITY_TYPE, GachaMachineBlockEntityRenderer::new);
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GACHA_MACHINE_BLOCK, RenderLayer.getCutout());
 
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.PERSONAL_VAULT, RenderLayer.getCutout());
+
     }
 
     public static void drawCardAnimation(int cardId) {

@@ -34,7 +34,6 @@ public class RichesfromBelow implements ModInitializer {
 
 		ModLootTableModifiers.modifyLootTables();
 
-
 		ModCommands.registerCommands();
 		TaskScheduler.initialize();
 

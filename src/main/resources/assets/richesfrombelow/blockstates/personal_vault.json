@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,locked=false": {
+      "model": "richesfrombelow:block/personal_vault"
+    },
+    "facing=east,locked=false": {
+      "model": "richesfrombelow:block/personal_vault",
+      "y": 90
+    },
+    "facing=south,locked=false": {
+      "model": "richesfrombelow:block/personal_vault",
+      "y": 180
+    },
+    "facing=west,locked=false": {
+      "model": "richesfrombelow:block/personal_vault",
+      "y": 270
+    },
+    "facing=north,locked=true": {
+      "model": "richesfrombelow:block/personal_vault_locked"
+    },
+    "facing=east,locked=true": {
+      "model": "richesfrombelow:block/personal_vault_locked",
+      "y": 90
+    },
+    "facing=south,locked=true": {
+      "model": "richesfrombelow:block/personal_vault_locked",
+      "y": 180
+    },
+    "facing=west,locked=true": {
+      "model": "richesfrombelow:block/personal_vault_locked",
+      "y": 270
+    }
+  }
+}

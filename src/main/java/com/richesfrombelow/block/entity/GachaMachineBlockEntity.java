@@ -39,6 +39,21 @@ public class GachaMachineBlockEntity extends BlockEntity {
 
     public static void tick(World world, BlockPos pos, BlockState state, GachaMachineBlockEntity be) {
         if (be.activationTicks > 0) {
+            if (!world.isClient()) {
+                int remainingTicks = be.activationTicks;
+                int totalTicks = be.totalAnimationTicks;
+
+                if (totalTicks > 0 && remainingTicks > 5) {
+                    if (remainingTicks % 3 == 0) {
+                        float progress = (float)(totalTicks - remainingTicks) / (float)totalTicks;
+                        float grindstonePitch = 0.8f + (1.0f * progress);
+                        world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS, 0.5f, grindstonePitch);
+                        float bitPitch = 0.4f + (1.0f * progress);
+                        world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_NOTE_BLOCK_BIT, SoundCategory.BLOCKS, 0.4f, bitPitch);
+                    }
+                }
+            }
+
             be.activationTicks--;
             if (!world.isClient() && be.activationTicks == 5) {
                 ServerWorld serverWorld = (ServerWorld) world;

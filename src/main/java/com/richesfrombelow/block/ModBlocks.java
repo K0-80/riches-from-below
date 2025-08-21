@@ -8,6 +8,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
@@ -15,6 +16,9 @@ public class ModBlocks {
 
     public static final Block GACHA_MACHINE_BLOCK = registerBlock("gacha_machine_block",
             new GachaMachineBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).nonOpaque().requiresTool().luminance(state -> 10)));
+
+    public static final Block PERSONAL_VAULT = registerBlock("personal_vault",
+            new PersonalVaultBlock(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).sounds(BlockSoundGroup.VAULT)));
 
 
     // Helper for blocks with a standard item
