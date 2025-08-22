@@ -1,20 +1,31 @@
 package com.richesfrombelow.block;
 
 import com.mojang.serialization.MapCodec;
+import com.richesfrombelow.RichesfromBelow;
+import com.richesfrombelow.block.entity.GachaMachineBlockEntity;
+import com.richesfrombelow.block.entity.ModBlockEntities;
 import com.richesfrombelow.block.entity.SlotMachineBlockEntity;
+import com.richesfrombelow.items.ModItems;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
@@ -23,6 +34,22 @@ import org.jetbrains.annotations.Nullable;
 public class SlotMachineBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
+
+    public static final MapCodec<SlotMachineBlock> CODEC = createCodec(SlotMachineBlock::new);
+
+    public enum SlotResult {
+        GREEN,
+        BLACK,
+        YELLOW,
+        RED;
+
+        private static final SlotResult[] VALUES = values();
+        private static final int SIZE = VALUES.length;
+
+        public static SlotResult getRandomResult(Random random) {
+            return VALUES[random.nextInt(SIZE)];
+        }
+    }
 
     public SlotMachineBlock(Settings settings) {
         super(settings);
@@ -34,6 +61,49 @@ public class SlotMachineBlock extends BlockWithEntity implements BlockEntityProv
     @Override
     protected MapCodec<? extends BlockWithEntity> getCodec() {
         return null;
+    }
+
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (!world.isClient) {
+            BlockPos basePos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos.down() : pos;
+
+            if (world.getBlockEntity(basePos) instanceof SlotMachineBlockEntity be && be.isIdle() && player.getStackInHand(player.getActiveHand()).isOf(ModItems.KOBO_COIN)) {
+                    world.playSound(null, pos, SoundEvents.BLOCK_VAULT_INSERT_ITEM, SoundCategory.BLOCKS, 1.0f, 1.2f);
+                    spinSlots(world, basePos, player);
+                    if (!player.isCreative()) {
+                        player.getStackInHand(player.getActiveHand()).decrement(1);
+                    }
+                    return ActionResult.SUCCESS;
+                }
+        }
+        return ActionResult.PASS;
+    }
+
+    private void spinSlots(World world, BlockPos pos, PlayerEntity player) {
+        SlotResult[] results = new SlotResult[3];
+        results[0] = SlotResult.getRandomResult(world.getRandom());
+        results[1] = SlotResult.getRandomResult(world.getRandom());
+        results[2] = SlotResult.getRandomResult(world.getRandom());
+
+        boolean isWin = (results[0] == results[1] && results[1] == results[2]);
+
+        String resultString = "Result: " + results[0] + ", " + results[1] + ", " + results[2];
+        if (isWin) {
+            RichesfromBelow.LOGGER.info("[Slot Machine] {} spun. {} - WIN!", player.getName().getString(), resultString);
+        } else {
+            RichesfromBelow.LOGGER.info("[Slot Machine] {} spun. {} - Loss.", player.getName().getString(), resultString);
+        }
+
+        if (world.getBlockEntity(pos) instanceof SlotMachineBlockEntity be) {
+            be.startSpin(results);
+            world.updateListeners(pos, world.getBlockState(pos), world.getBlockState(pos), Block.NOTIFY_LISTENERS);
+        }
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return validateTicker(type, ModBlockEntities.SLOT_MACHINE, SlotMachineBlockEntity::tick);
     }
 
     @Override

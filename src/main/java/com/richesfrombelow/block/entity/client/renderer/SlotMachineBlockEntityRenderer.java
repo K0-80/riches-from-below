@@ -36,6 +36,7 @@ public class SlotMachineBlockEntityRenderer implements BlockEntityRenderer<SlotM
         assert entity.getWorld() != null;
         int worldLight = WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos().up());
 
+        model.setAngles(entity, tickDelta);
         model.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityCutout(TEXTURE)), worldLight, overlay);
 
         matrices.pop();
