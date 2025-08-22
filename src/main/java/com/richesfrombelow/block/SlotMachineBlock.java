@@ -39,7 +39,7 @@ public class SlotMachineBlock extends BlockWithEntity implements BlockEntityProv
 
     public enum SlotResult {
         GREEN,
-        BLACK,
+        PURPLE,
         YELLOW,
         RED;
 
@@ -68,7 +68,7 @@ public class SlotMachineBlock extends BlockWithEntity implements BlockEntityProv
         if (!world.isClient) {
             BlockPos basePos = state.get(HALF) == DoubleBlockHalf.UPPER ? pos.down() : pos;
 
-            if (world.getBlockEntity(basePos) instanceof SlotMachineBlockEntity be && be.isIdle() && player.getStackInHand(player.getActiveHand()).isOf(ModItems.KOBO_COIN)) {
+            if (world.getBlockEntity(basePos) instanceof SlotMachineBlockEntity     be && be.isIdle() && player.getStackInHand(player.getActiveHand()).isOf(ModItems.KOBO_COIN)) {
                     world.playSound(null, pos, SoundEvents.BLOCK_VAULT_INSERT_ITEM, SoundCategory.BLOCKS, 1.0f, 1.2f);
                     spinSlots(world, basePos, player);
                     if (!player.isCreative()) {
@@ -86,17 +86,8 @@ public class SlotMachineBlock extends BlockWithEntity implements BlockEntityProv
         results[1] = SlotResult.getRandomResult(world.getRandom());
         results[2] = SlotResult.getRandomResult(world.getRandom());
 
-        boolean isWin = (results[0] == results[1] && results[1] == results[2]);
-
-        String resultString = "Result: " + results[0] + ", " + results[1] + ", " + results[2];
-        if (isWin) {
-            RichesfromBelow.LOGGER.info("[Slot Machine] {} spun. {} - WIN!", player.getName().getString(), resultString);
-        } else {
-            RichesfromBelow.LOGGER.info("[Slot Machine] {} spun. {} - Loss.", player.getName().getString(), resultString);
-        }
-
         if (world.getBlockEntity(pos) instanceof SlotMachineBlockEntity be) {
-            be.startSpin(results);
+            be.startSpin(results, player);
             world.updateListeners(pos, world.getBlockState(pos), world.getBlockState(pos), Block.NOTIFY_LISTENERS);
         }
     }

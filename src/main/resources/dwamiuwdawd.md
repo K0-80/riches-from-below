@@ -48,3 +48,54 @@ Flavor Text: "It lets you see in the dark, but the dark sees you, too."
 
 
 GUIDED CONTRACT - upgrades gatcha machine to cool nether veriant, remove common drops from loottable, 
+
+
+
+
+all mobs and items will  be spawned in and launched out from the slot at the bottom of the machine, when launching them out, give them a small randoom velocity to the left/right in additction the the forward velocity
+
+3 x Gold:
+spawn the fortune_cookie_treasure loottable
+
+3 x Emerald
+   *   Spawns a Wandering Trader who stays for only 5 minutes and sells custom trades
+   *   Spawns 3 creepers, then  striking them with lighting
+
+3 x Redstone
+   *   A warning sound plays, and after a 3-second delay, **3 anvils fall from the sky**, aimed at the player's last position.
+   *   If the player survives, a chest appears on top of the machine containing the "Hazard Pay":
+      *   **5 K0BO Coins**
+      *   **16 TNT**
+      *   **The House's Edge** sword (A rare chance to get this modded weapon!)
+
+3 x Amethyst
+   *   A massive shower of **Experience Orbs** erupts from the machine (enough for ~15-20 levels).
+   *   Spawns an **Allay** next to the player, holding a PACIFIST_CROWN item.
+   *   spawn the burryed treasure loottable.
+
+
+
+2x Gold
+1 K0BO Coin 
+2-4 K0BO Coin Fragments.
+
+2 x Emerald
+A Potion of Luck (I) 
+Hero of the village (I)
+3-5 Emerald blocks
+
+2 x Redstone
+Spawns 2-5 Silverfish 
+or gives the player Slowness 2 for 10 seconds
+
+2 x Amethyst
+   *   **Reward:** A small burst of Experience Orbs (~3-5 levels worth).
+*   Gives the player a random,  positive potion effect (e.g., Strength II, Regeneration II) with infinite time.
+
+---
+
+Three Different Colors
+A random amount of the following items:
+Dirt, Rotten Flesh, Poppies,  valuebvle mineral nuggets, etc
+come up with a full loottable for this
+e clear, thematic outcomes, a good balance of risk and reward, and enough variety to stay exciting for a long time.

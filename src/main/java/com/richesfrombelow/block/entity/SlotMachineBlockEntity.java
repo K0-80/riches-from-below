@@ -3,9 +3,12 @@ package com.richesfrombelow.block.entity;
 import com.richesfrombelow.block.SlotMachineBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -23,20 +26,14 @@ public class SlotMachineBlockEntity extends BlockEntity {
 
     private State currentState = State.IDLE;
 
-    private static final int LEVER_PULL_DURATION = 8;
-    private static final int LEVER_RETURN_DURATION = 50;
-    private static final float MAX_LEVER_PITCH = MathHelper.PI / 3.0f;
-    private static final float LEVER_BOUNCE_DECAY = 0.15f;
-    private static final float LEVER_BOUNCE_FREQUENCY = 0.8f;
-    private static final int[] WHEEL_STOP_TICKS = {60, 90, 140};
-    private static final int DECELERATION_TICKS = 40;
-    private static final float INITIAL_WHEEL_SPIN_SPEED = 0.8f;
-
     private int animationTicks = 0;
     private float leverPitch = 0.0f;
     private float prevLeverPitch = 0.0f;
+
     private final float[] wheelRotations = new float[3];
     private final float[] prevWheelRotations = new float[3];
+    private final float[] wheelSpeeds = new float[3];
+    private final float[] lastHatSoundRotations = new float[3];
     private final float[] finalWheelRotations = new float[3];
     private final float[] decelerationStartRotations = new float[3];
     private final boolean[] isDecelerating = {false, false, false};
@@ -58,41 +55,48 @@ public class SlotMachineBlockEntity extends BlockEntity {
         be.animationTicks++;
 
         switch (be.currentState) {
-            case LEVER_PULLING:
-                float pullProgress = MathHelper.clamp((float) be.animationTicks / LEVER_PULL_DURATION, 0.0f, 1.0f);
-                be.leverPitch = MAX_LEVER_PITCH * pullProgress * pullProgress;
+            case LEVER_PULLING -> {
+                float pullProgress = MathHelper.clamp((float) be.animationTicks / 10.0f, 0.0f, 1.0f);
+                be.leverPitch = (MathHelper.PI / 3.0f) * pullProgress * pullProgress;
 
-                if (be.animationTicks >= LEVER_PULL_DURATION) {
+                if (be.animationTicks >= 10) {
                     be.currentState = State.SPINNING;
                     be.animationTicks = 0;
                 }
-                break;
+            }
+            case SPINNING -> {
+                if (be.animationTicks == 1) {
+                    for (int i = 0; i < 3; i++) {
+                        float soundInterval = MathHelper.PI / 3.0f;
+                        be.lastHatSoundRotations[i] = be.wheelRotations[i] - (i * soundInterval / 3.0f);
+                    }
+                }
 
-            case SPINNING:
-                if (be.animationTicks < LEVER_RETURN_DURATION) {
+                if (be.animationTicks < 50) {
                     float t = be.animationTicks;
-                    float decay = (float) Math.exp(-LEVER_BOUNCE_DECAY * t);
-                    float oscillation = (float) Math.cos(LEVER_BOUNCE_FREQUENCY * t);
-                    be.leverPitch = MAX_LEVER_PITCH * decay * oscillation;
+                    float decay = (float) Math.exp(-0.2f * t);
+                    float oscillation = (float) Math.cos(0.8f * t);
+                    be.leverPitch = (MathHelper.PI / 3.0f) * decay * oscillation;
                 } else {
                     be.leverPitch = 0;
                 }
 
-
+                int[] wheelStopTicks = {40, 60, 100};
                 for (int i = 0; i < 3; i++) {
-                    long stopTick = WHEEL_STOP_TICKS[i];
-                    long decelerationStartTick = stopTick - DECELERATION_TICKS;
+                    long stopTick = wheelStopTicks[i];
+                    long decelerationStartTick = stopTick - 30;
 
                     if (be.animationTicks >= stopTick) {
                         if (be.isDecelerating[i]) {
                             be.isDecelerating[i] = false;
                             be.wheelRotations[i] = be.finalWheelRotations[i];
                         }
+                        be.wheelSpeeds[i] = 0.0f;
                     } else if (be.animationTicks >= decelerationStartTick) {
                         if (!be.isDecelerating[i]) {
                             be.isDecelerating[i] = true;
                             be.decelerationStartRotations[i] = be.wheelRotations[i];
-                            float estimatedTravelDistance = (INITIAL_WHEEL_SPIN_SPEED / 2.0f) * DECELERATION_TICKS;
+                            float estimatedTravelDistance = (0.8f / 2.0f) * 30;
                             float projectedFinalRotation = be.wheelRotations[i] + estimatedTravelDistance;
                             float targetAngle = be.finalWheelRotations[i] % (2 * MathHelper.PI);
                             float currentRevolutions = (float) Math.floor(projectedFinalRotation / (2 * MathHelper.PI));
@@ -103,28 +107,45 @@ public class SlotMachineBlockEntity extends BlockEntity {
                             }
                             be.finalWheelRotations[i] = snappedRotation;
                         }
-                        float progress = (float) (be.animationTicks - decelerationStartTick) / DECELERATION_TICKS;
+                        float progress = (float) (be.animationTicks - decelerationStartTick) / 30.0f;
+                        be.wheelSpeeds[i] = 0.8f * (1.0f - progress);
                         float easeOutProgress = 1.0f - (1.0f - progress) * (1.0f - progress);
                         float totalRotationDistance = be.finalWheelRotations[i] - be.decelerationStartRotations[i];
                         be.wheelRotations[i] = be.decelerationStartRotations[i] + totalRotationDistance * easeOutProgress;
                     } else {
-                        be.wheelRotations[i] += INITIAL_WHEEL_SPIN_SPEED;
+                        be.wheelRotations[i] += 0.8f;
+                        be.wheelSpeeds[i] = 0.8f;
                     }
                 }
 
-                if (be.animationTicks >= WHEEL_STOP_TICKS[2] + 40) {
+                if (world.isClient) {
+                    for (int i = 0; i < 3; i++) {
+                        if (be.wheelSpeeds[i] > 0.01f) {
+                            while (be.wheelRotations[i] - be.lastHatSoundRotations[i] >= (MathHelper.PI / 3.0f)) {
+                                float speedRatio = be.wheelSpeeds[i] / 0.8f;
+                                float pitch = 0.7f + speedRatio * 0.8f;
+                                world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                                        SoundEvents.BLOCK_NOTE_BLOCK_HAT.value(), SoundCategory.BLOCKS, 0.6f, pitch, false);
+                                be.lastHatSoundRotations[i] += (MathHelper.PI / 3.0f);
+                            }
+                        } else {
+                            be.lastHatSoundRotations[i] = be.wheelRotations[i];
+                        }
+                    }
+                }
+
+                if (be.animationTicks >= wheelStopTicks[2]) {
                     be.currentState = State.IDLE;
                 }
-                break;
-
-            case IDLE:
+            }
+            case IDLE -> {
                 be.leverPitch = 0;
                 be.animationTicks = 0;
-                break;
+            }
         }
     }
 
-    public void startSpin(SlotMachineBlock.SlotResult[] results) {
+    public void startSpin(SlotMachineBlock.SlotResult[] results, PlayerEntity player) {
         if (this.currentState == State.IDLE) {
             this.currentState = State.LEVER_PULLING;
             this.animationTicks = 0;
@@ -138,7 +159,7 @@ public class SlotMachineBlockEntity extends BlockEntity {
     private float getRotationFor(SlotMachineBlock.SlotResult result) {
         return switch (result) {
             case YELLOW -> 0;
-            case BLACK -> MathHelper.PI / 2;
+            case PURPLE -> MathHelper.PI / 2;
             case GREEN -> MathHelper.PI;
             case RED -> 3 * MathHelper.PI / 2;
         };
