@@ -18,8 +18,9 @@ public class ModItemGroups {
                             .displayName(Text.translatable("itemgroup.riches.riches_items"))
                         .entries((displayContext, entries) -> {
 
-                            entries.add(ModItems.COIN_FRAGMENT);
                             entries.add(ModItems.KOBO_COIN);
+                            entries.add(ModItems.COIN_FRAGMENT);
+                            
                             entries.add(ModBlocks.GACHA_MACHINE_BLOCK);
                             entries.add(ModBlocks.SLOT_MACHINE);
 
@@ -32,7 +33,7 @@ public class ModItemGroups {
                             entries.add(ModItems.LUCKY_CLOVER);
                             entries.add(ModItems.LIQUID_GOLD);
 
-//                            entries.add(ModBlocks.PERSONAL_VAULT);
+//                           entries.add(ModBlocks.PERSONAL_VAULT);
 
                             //INF PLUSH!!!!
 //                            entries.add(ModItems.PLUSHIE);

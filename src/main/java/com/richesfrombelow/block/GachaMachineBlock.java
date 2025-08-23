@@ -35,6 +35,8 @@ public class GachaMachineBlock extends BlockWithEntity implements BlockEntityPro
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
 
+
+
     public GachaMachineBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState()

@@ -60,7 +60,7 @@ public class SlotMachineBlock extends BlockWithEntity implements BlockEntityProv
 
     @Override
     protected MapCodec<? extends BlockWithEntity> getCodec() {
-        return null;
+        return CODEC;
     }
 
     @Override

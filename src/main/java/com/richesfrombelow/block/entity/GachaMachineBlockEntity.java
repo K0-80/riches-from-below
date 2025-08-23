@@ -51,7 +51,7 @@ public class GachaMachineBlockEntity extends BlockEntity {
                         if (soundPhaseDuration > 0) {
                             float progress = (float) ticksIntoSoundPhase / (float) soundPhaseDuration;
                             float grindstonePitch = 0.8f + (1.0f * progress);
-                            world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS, 0.3f, grindstonePitch);
+                            world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS, 0.2f, grindstonePitch);
                             float bitPitch = 0.4f + (1.0f * progress);
                             world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_NOTE_BLOCK_BIT, SoundCategory.BLOCKS, 0.4f, bitPitch);
                         }
