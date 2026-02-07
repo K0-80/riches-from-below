@@ -24,7 +24,7 @@ public class LivingEntityMixin {
         LivingEntity killedEntity = (LivingEntity) (Object) this;
         if (causedByPlayer && source.getAttacker() instanceof PlayerEntity player) {
             if (player.getInventory().contains(new ItemStack(ModItems.COLLECTOR_SUITCASE))) {
-                if (killedEntity.getWorld().random.nextFloat() < 0.7f) { // 2%
+                if (killedEntity.getWorld().random.nextFloat() < 0.2f) { // 20%
                     World world = killedEntity.getWorld();
                     killedEntity.dropItem(ModItems.COIN_FRAGMENT);
                     if (!world.isClient()) {

@@ -99,3 +99,11 @@ A random amount of the following items:
 Dirt, Rotten Flesh, Poppies,  valuebvle mineral nuggets, etc
 come up with a full loottable for this
 e clear, thematic outcomes, a good balance of risk and reward, and enough variety to stay exciting for a long time.
+
+notes:
+fix  up wierd issues with breaking slot block and inconsitenices with gatcha block
+fix slot block not havving  a  texture
+change up flower crown texture when worn, make it more  consitant
+clean up mod overall
+
+fix  whatever the fuck the vault currently is, idk why u need a trial chamber vault to make it???
