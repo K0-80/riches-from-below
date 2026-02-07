@@ -33,16 +33,14 @@ public class ModItemGroups {
                             entries.add(ModItems.LUCKY_CLOVER);
                             entries.add(ModItems.LIQUID_GOLD);
 
-//                           entries.add(ModBlocks.PERSONAL_VAULT);
 
-                            //INF PLUSH!!!!
-//                            entries.add(ModItems.PLUSHIE);
-//
-//                            ItemStack k08Plushie = new ItemStack(ModItems.PLUSHIE);
-//                            k08Plushie.set(ModDataComponents.PLUSHIE_VARIANT, new PlushieVariant("k08"));
-//                            k08Plushie.set(DataComponentTypes.CUSTOM_MODEL_DATA, new CustomModelDataComponent(2));
-//                            entries.add(k08Plushie);
-                            //INF PLUSH!!!
+
+
+
+
+
+
+
 
                         }).build());
 

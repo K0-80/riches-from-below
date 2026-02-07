@@ -3,22 +3,22 @@
   "category": "misc",
   "key": {
     "G": {
-      "item": "minecraft:glass"
+      "item": "minecraft:gold_block"
     },
     "I": {
       "item": "minecraft:iron_block"
     },
-    "R": {
-      "item": "minecraft:redstone_block"
+    "L": {
+      "item": "minecraft:lever"
     }
   },
   "pattern": [
-    "GG ",
-    "GR ",
+    "IG ",
+    "IL ",
     "II "
   ],
   "result": {
     "count": 1,
-    "id": "richesfrombelow:gacha_machine_block"
+    "id": "richesfrombelow:slot_machine"
   }
 }

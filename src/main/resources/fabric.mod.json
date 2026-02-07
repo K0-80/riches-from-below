@@ -8,10 +8,10 @@
 		"K08_"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/K0-80/riches-from-below",
+		"sources": "https://github.com/K0-80/riches-from-below"
 	},
-	"license": "CC0-1.0",
+	"license": "All Rights Reserved",
 	"icon": "assets/richesfrombelow/icon.png",
 	"environment": "*",
 	"entrypoints": {

@@ -1,8 +1,6 @@
 package com.richesfrombelow.block;
 
 import com.mojang.serialization.MapCodec;
-import com.richesfrombelow.RichesfromBelow;
-import com.richesfrombelow.block.entity.GachaMachineBlockEntity;
 import com.richesfrombelow.block.entity.ModBlockEntities;
 import com.richesfrombelow.block.entity.SlotMachineBlockEntity;
 import com.richesfrombelow.items.ModItems;
@@ -28,6 +26,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldEvents;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
@@ -137,20 +136,24 @@ public class SlotMachineBlock extends BlockWithEntity implements BlockEntityProv
         }
         BlockState blockState = world.getBlockState(pos.down());
         return blockState.isOf(this) && blockState.get(HALF) == DoubleBlockHalf.LOWER;
-    }
 
+    }
     @Override
-    public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
-        if (!world.isClient && player.isCreative()) {
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (!world.isClient) {
             DoubleBlockHalf half = state.get(HALF);
             BlockPos otherPos = (half == DoubleBlockHalf.LOWER) ? pos.up() : pos.down();
             BlockState otherState = world.getBlockState(otherPos);
+
             if (otherState.isOf(this) && otherState.get(HALF) != half) {
+
                 world.setBlockState(otherPos, Blocks.AIR.getDefaultState(), Block.NOTIFY_ALL | Block.SKIP_DROPS);
-                world.addBlockBreakParticles(otherPos, otherState);
+                world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, otherPos, Block.getRawIdFromState(otherState));
             }
         }
-        super.afterBreak(world, player, pos, state, blockEntity, tool);
+
+        super.onBreak(world, pos, state, player);
+        return state;
     }
 
 

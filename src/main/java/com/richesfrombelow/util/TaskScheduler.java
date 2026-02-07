@@ -33,14 +33,12 @@ public class TaskScheduler {
             }
         }
 
-        // Remove completed tasks
         if (!tasksToRemove.isEmpty()) {
             tasks.removeAll(tasksToRemove);
         }
 
-        // Execute the tasks that are due.
-        // This is done *after* iteration and removal to prevent ConcurrentModificationException
-        // if a task schedules another task.
+
+
         for (ScheduledTask task : tasksToRun) {
             task.getRunnable().run();
         }

@@ -48,6 +48,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void accept(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> consumer) {
+        super.accept(consumer);
+
+
         consumer.accept(ModLootTables.FORTUNE_COOKIE_TREASURE_CHEST_KEY,
                 LootTable.builder()
 

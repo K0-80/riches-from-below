@@ -44,20 +44,18 @@ public class GachaMachineBlockEntityRenderer implements BlockEntityRenderer<Gach
                 float shakeDuration = shakeEndTime - shakeStartTime;
                 float shakeProgress = progress - shakeStartTime;
                 float shakeProgressRatio = shakeProgress / shakeDuration;
-                //chjat am i cooked i had to make gpt generate this :sob:
-                // --- Angle Scaling ---
-                // The maximum tilt angle increases as the animation progresses.
+
+
+
                 float startAngle = 2.0f;
                 float endAngle = 10.0f;
                 float currentMaxAngle = startAngle + (endAngle - startAngle) * shakeProgressRatio;
 
-                // --- Frequency Scaling ---
-                // The number of shakes per second also increases.
+
                 float startShakesPerTick = 2.0f / 20.0f; // Start at 2 shakes per second
                 float endShakesPerTick = 8.0f / 20.0f;   // End at 8 shakes per second
 
-                // The phase is the integral of the frequency over time.
-                // This results in a quadratic function of time, making the oscillation speed up smoothly.
+
                 float phase = 2.0f * (float)Math.PI * (
                         startShakesPerTick * shakeProgress +
                                 (endShakesPerTick - startShakesPerTick) / (2.0f * shakeDuration) * shakeProgress * shakeProgress

@@ -138,7 +138,6 @@ public class PersonalVaultBlock extends BlockWithEntity implements BlockEntityPr
             return ActionResult.PASS;
         }
 
-        // Sneaking Logic: Always check time for any player
         if (player.isSneaking()) {
             world.playSound(null, pos, SoundEvents.BLOCK_VAULT_DEACTIVATE, SoundCategory.BLOCKS, 0.5f, 1.2f);
             if (state.get(LOCKED)) {
@@ -153,14 +152,12 @@ public class PersonalVaultBlock extends BlockWithEntity implements BlockEntityPr
             return ActionResult.SUCCESS;
         }
 
-        // Normal Use Logic
         boolean isOwner = be.getOwnerUuid() != null && player.getUuid().equals(be.getOwnerUuid());
         ItemStack handStack = player.getMainHandStack();
         boolean isLocked = state.get(LOCKED);
 
-        // Case 1: Player is the owner
         if (isOwner) {
-            // Sub-case: Owner is holding a coin fragment to add time
+
             if (handStack.isOf(ModItems.COIN_FRAGMENT)) {
                 world.setBlockState(pos, state.with(LOCKED, true), 3);
                 be.addLockTime(world);
@@ -178,20 +175,19 @@ public class PersonalVaultBlock extends BlockWithEntity implements BlockEntityPr
 
                 return ActionResult.SUCCESS;
             } else {
-                // Sub-case: Owner is opening the vault
+
                 world.playSound(null, pos, SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.BLOCKS, 0.5f, world.random.nextFloat() * 0.1f + 0.9f);
                 player.openHandledScreen(be);
                 return ActionResult.CONSUME;
             }
         }
 
-        // Case 2: Player is not the owner
         if (isLocked) {
             world.playSound(null, pos, SoundEvents.BLOCK_VAULT_CLOSE_SHUTTER, SoundCategory.BLOCKS, 1.0f, 1.0f);
             player.sendMessage(Text.translatable("block.richesfrombelow.personal_vault.locked_by", be.getOwnerName(world)).formatted(Formatting.RED), true);
             return ActionResult.FAIL;
         } else {
-            // Unlocked, so anyone can open it
+
             world.playSound(null, pos, SoundEvents.BLOCK_IRON_DOOR_OPEN, SoundCategory.BLOCKS, 0.5f, world.random.nextFloat() * 0.1f + 0.9f);
             player.openHandledScreen(be);
             return ActionResult.CONSUME;

@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
 import net.minecraft.recipe.BrewingRecipeRegistry;
@@ -27,10 +28,22 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     @Override
     public void generate(RecipeExporter recipeExporter) {
 
-        //K0BO coin
-        offerReversibleCompactingRecipes(recipeExporter, RecipeCategory.MISC, ModItems.COIN_FRAGMENT, RecipeCategory.MISC, ModItems.KOBO_COIN);
+        Identifier FRAG_TO_COIN = Identifier.of(RichesfromBelow.MOD_ID, "kobo_coin_from_fragments");
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.KOBO_COIN, 1)
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .input('#', ModItems.COIN_FRAGMENT)
+                .criterion("has_coin_fragment", conditionsFromItem(ModItems.COIN_FRAGMENT))
+                .offerTo(recipeExporter, FRAG_TO_COIN);
+        Identifier COIN_TO_FRAG = Identifier.of(RichesfromBelow.MOD_ID, "coin_fragments_from_kobo_coin");
 
-        // gacha machine
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.COIN_FRAGMENT, 9)
+                .input(ModItems.KOBO_COIN)
+                .criterion("has_kobo_coin", conditionsFromItem(ModItems.KOBO_COIN))
+                .offerTo(recipeExporter, COIN_TO_FRAG);
+
+        Identifier SLOT_RECIPE_ID = Identifier.of(RichesfromBelow.MOD_ID, "slot_machine");
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.GACHA_MACHINE_BLOCK, 1)
                 .pattern("GG ")
                 .pattern("GR ")
@@ -39,9 +52,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('I', Items.IRON_BLOCK)
                 .input('R', Items.REDSTONE_BLOCK)
                 .criterion(hasItem(Items.IRON_BLOCK), conditionsFromItem(Items.IRON_BLOCK))
-                .offerTo(recipeExporter, RecipeProvider.getRecipeName(ModBlocks.GACHA_MACHINE_BLOCK));
+                .offerTo(recipeExporter, SLOT_RECIPE_ID);
 
-        //slot machine
+        Identifier GACHA_RECIPE_ID = Identifier.of(RichesfromBelow.MOD_ID, "gacha_machine_block");
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.SLOT_MACHINE, 1)
                 .pattern("IG ")
                 .pattern("IL ")
@@ -50,7 +63,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('G', Items.GOLD_BLOCK)
                 .input('L', Items.LEVER)
                 .criterion(hasItem(Items.IRON_BLOCK), conditionsFromItem(Items.IRON_BLOCK))
-                .criterion(hasItem(Items.GOLD_BLOCK), conditionsFromItem(Items.GOLD_BLOCK))
-                .offerTo(recipeExporter, RecipeProvider.getRecipeName(ModBlocks.SLOT_MACHINE));
+                .offerTo(recipeExporter, GACHA_RECIPE_ID);
     }
 }

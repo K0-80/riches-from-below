@@ -23,21 +23,15 @@ public class ModBlocks {
     public static final Block PERSONAL_VAULT = registerBlock("personal_vault",
             new PersonalVaultBlock(AbstractBlock.Settings.copy(Blocks.OBSIDIAN).sounds(BlockSoundGroup.VAULT)));
 
-
-
-
-    // Helper for blocks with a standard item
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block, new Item.Settings());
         return Registry.register(Registries.BLOCK, Identifier.of(RichesfromBelow.MOD_ID, name), block);
     }
 
-    // Helper for blocks without auto item registiotn
     private static Block registerBlockWithoutItem(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(RichesfromBelow.MOD_ID, name), block);
     }
 
-    // Helper to register a BlockItem with specific settings
     private static Item registerBlockItem(String name, Block block, Item.Settings settings) {
         return Registry.register(Registries.ITEM, Identifier.of(RichesfromBelow.MOD_ID, name),
                 new BlockItem(block, settings));

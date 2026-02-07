@@ -65,7 +65,7 @@ public class LiquidGoldItem extends Item {
     }
 
     private static final Map<Block, Supplier<Optional<Block>>> CONVERSION_MAP = Map.ofEntries(
-            // --- OVERWORLD SOIL & STONE ---
+
             Map.entry(Blocks.DIRT, () -> Optional.of(Blocks.GRASS_BLOCK)),
             Map.entry(Blocks.COARSE_DIRT, () -> Optional.of(Blocks.DIRT)),
             Map.entry(Blocks.ROOTED_DIRT, () -> Optional.of(Blocks.MOSS_BLOCK)),
@@ -82,7 +82,6 @@ public class LiquidGoldItem extends Item {
             Map.entry(Blocks.COBBLED_DEEPSLATE, LiquidGoldItem::getDeepslateConversion),
             Map.entry(Blocks.TUFF, LiquidGoldItem::getDeepslateConversion),
 
-            // --- NETHER ---
             Map.entry(Blocks.NETHERRACK, LiquidGoldItem::getNetherrackConversion),
             Map.entry(Blocks.SOUL_SAND, () -> Optional.of(Blocks.SOUL_SOIL)),
             Map.entry(Blocks.SOUL_SOIL, () -> Optional.of(Blocks.NETHER_WART_BLOCK)),
@@ -90,16 +89,13 @@ public class LiquidGoldItem extends Item {
             Map.entry(Blocks.SMOOTH_BASALT, () -> Optional.of(Blocks.MAGMA_BLOCK)),
             Map.entry(Blocks.BLACKSTONE, () -> Optional.of(Blocks.GILDED_BLACKSTONE)),
 
-            // --- THE END ---
             Map.entry(Blocks.END_STONE, () -> Optional.of(Blocks.END_STONE_BRICKS)),
             Map.entry(Blocks.END_STONE_BRICKS, () -> Optional.of(Blocks.PURPUR_BLOCK)),
 
-            // --- ICE & SNOW ---
             Map.entry(Blocks.SNOW_BLOCK, () -> Optional.of(Blocks.ICE)),
             Map.entry(Blocks.ICE, () -> Optional.of(Blocks.PACKED_ICE)),
             Map.entry(Blocks.PACKED_ICE, () -> Optional.of(Blocks.BLUE_ICE)),
 
-            // --- ORE UPGRADES ---
             Map.entry(Blocks.COAL_ORE, () -> Optional.of(Blocks.IRON_ORE)),
             Map.entry(Blocks.DEEPSLATE_COAL_ORE, () -> Optional.of(Blocks.DEEPSLATE_IRON_ORE)),
             Map.entry(Blocks.COPPER_ORE, () -> Optional.of(Blocks.GOLD_ORE)),
@@ -116,7 +112,6 @@ public class LiquidGoldItem extends Item {
             Map.entry(Blocks.DEEPSLATE_DIAMOND_ORE, () -> Optional.of(Blocks.ANCIENT_DEBRIS)),
             Map.entry(Blocks.NETHER_QUARTZ_ORE, () -> Optional.of(Blocks.NETHER_GOLD_ORE)),
 
-            // --- VEGETATION ---
             Map.entry(Blocks.OAK_LOG, () -> Optional.of(Blocks.DARK_OAK_LOG)),
             Map.entry(Blocks.BIRCH_LOG, () -> Optional.of(Blocks.MANGROVE_LOG)),
             Map.entry(Blocks.SPRUCE_LOG, () -> Optional.of(Blocks.CHERRY_LOG)),

@@ -33,7 +33,6 @@ public class DeckOfFatesAnimationRenderer {
     private static ItemStack revealedCardFront;
     private static final ItemStack cardBack;
 
-    //  config
     private static final int FAN_OUT_DURATION = 20;
     private static final int RISE_AND_ASCEND_DURATION = 50;
 
@@ -147,7 +146,7 @@ public class DeckOfFatesAnimationRenderer {
                 }
 
                 if (time >= RISE_DURATION) {
-                    // Animate the retreat
+
                     float fanRetractProgress = (time - RISE_DURATION) / ASCEND_DURATION;
                     float easedFanRetractProgress = easeInCubic(fanRetractProgress);
                     Vector2f endPos = new Vector2f(fanCenterX + fanWidth / 2.0f + 50, fanBottomY);

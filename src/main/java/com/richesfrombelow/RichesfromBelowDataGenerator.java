@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
 public class RichesfromBelowDataGenerator implements DataGeneratorEntrypoint {
-	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen	//i hate daagen hate data gen
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();

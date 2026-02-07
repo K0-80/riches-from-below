@@ -83,7 +83,7 @@ public class GatchaBallLootTableUtil {
 
     private static List<ItemStack> getUncommonLoot(Random random) {
         List<Supplier<ItemStack>> pool = List.of(
-                //                () -> createRandomEnchantedBook(random, 1)
+
                 () -> new ItemStack(ModItems.COIN_FRAGMENT, random.nextInt(2) + 2),
                 () -> new ItemStack(ModItems.FORTUNE_COOKIE, random.nextInt(6) + 5), // 5-10
                 () -> new ItemStack(Items.GOLD_INGOT, random.nextInt(4) + 3), // 3-6
@@ -102,7 +102,7 @@ public class GatchaBallLootTableUtil {
 
     private static List<ItemStack> getRareLoot(Random random) {
         List<Supplier<ItemStack>> pool = List.of(
-                //                () -> createRandomEnchantedBook(random, 2)
+
                 () -> new ItemStack(ModItems.COIN_FRAGMENT, random.nextInt(2) + 5),
                 () -> new ItemStack(ModItems.COLLECTOR_SUITCASE, 1),
                 () -> new ItemStack(ModItems.WISHING_STAR, random.nextInt(2) + 3),
@@ -121,7 +121,7 @@ public class GatchaBallLootTableUtil {
 
     private static List<ItemStack> getEpicLoot(Random random) {
         List<Supplier<ItemStack>> pool = List.of(
-                //                () -> createRandomEnchantedBook(random, 3)
+
                 () -> new ItemStack(ModItems.KOBO_COIN, random.nextInt(2)), // 2-3
                 () -> new ItemStack(ModItems.ALL_IN, 1),
                 () -> new ItemStack(ModItems.DECK_OF_FATES, 1),
@@ -140,7 +140,7 @@ public class GatchaBallLootTableUtil {
 
     private static List<ItemStack> getLegendaryLoot(Random random) {
         List<Supplier<ItemStack>> pool = List.of(
-                //                () -> createRandomEnchantedBook(random, 4)
+
                 () -> new ItemStack(ModItems.KOBO_COIN, random.nextInt(2) + 2), // 2-3
                 () -> new ItemStack(ModItems.CROWN_OF_GREED, 1),
                 () -> new ItemStack(ModItems.PACIFIST_CROWN, 1),
@@ -156,7 +156,7 @@ public class GatchaBallLootTableUtil {
     private static List<ItemStack> getExoticLoot(Random random) {
         List<Supplier<ItemStack>> pool = List.of(
                 () -> new ItemStack(ModItems.KOBO_COIN, 32),
-//                () -> new ItemStack(ModItems.GUILDED_CONTRACT, 1),
+
                 () -> new ItemStack(Items.DRAGON_EGG, 1)
         );
         return List.of(pool.get(random.nextInt(pool.size())).get());

@@ -1,2 +1,5 @@
-// 1.21	2025-08-21T17:01:00.6487677	RichesfromBelow/Block Loot Tables
+
 cd454dfb0042429baff7fedc0c09abd4c0a4dcf9 data\richesfrombelow\loot_table\chests\fortune_cookie_treasure.json
+13e6e3136b7fb1149f0f41325245426c5a755856 data\richesfrombelow\loot_table\blocks\slot_machine.json
+7e30788db883301fc711489c8110c163547c09e1 data\richesfrombelow\loot_table\blocks\gacha_machine_block.json
+6c4dc5beab3e094ad5a7d08e56fd06ca41a2de3d data\richesfrombelow\loot_table\blocks\personal_vault.json

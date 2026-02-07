@@ -27,34 +27,33 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 
-//        getOrCreateTagBuilder(ItemTags.TRIM_TEMPLATES)
-//                .add(ModItems.GUISE_SMITHING_TEMPLATE);
-//
-//        //for cusstom enchants
-//        getOrCreateTagBuilder(ModTags.Items.ANCHOR_ENCHANTBLE)
-//                .add(ModItems.ANCHOR);
-//        getOrCreateTagBuilder(ModTags.Items.WIND_BLADE_ENCHANTBLE)
-//                .add(ModItems.WIND_BLADE);
-//        getOrCreateTagBuilder(ModTags.Items.SCYTHE_ENCHANTBLE)
-//                .add(ModItems.SCYTHE);
-//        getOrCreateTagBuilder(ModTags.Items.MIRAGE_ENCHANTBLE)
-//                .add(ModItems.MIRAGE);
-//
-//        //normal minecraft tags
-//        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE)
-//                .add(ModItems.ANCHOR, ModItems.WIND_BLADE, ModItems.SCYTHE, ModItems.MIRAGE);
-//        getOrCreateTagBuilder(ItemTags.VANISHING_ENCHANTABLE)
-//                .add(ModItems.ANCHOR, ModItems.WIND_BLADE, ModItems.SCYTHE, ModItems.MIRAGE);
-//
-//        //all sword enchants
-//        getOrCreateTagBuilder(ItemTags.SWORDS)
-//                .add(ModItems.WIND_BLADE, ModItems.SCYTHE, ModItems.MIRAGE);
-//
-//        getOrCreateTagBuilder(ModTags.Items.IMPALING_NEW)
-//                .add(ModItems.ANCHOR, Items.TRIDENT);
-//        getOrCreateTagBuilder(ModTags.Items.LOOTING_NEW)
-//                .add(ModItems.ANCHOR, Items.TRIDENT,
-//                        Items.WOODEN_AXE, Items.STONE_AXE, Items.IRON_AXE, Items.GOLDEN_AXE, Items.DIAMOND_AXE, Items.NETHERITE_AXE,
-//                        Items.WOODEN_SWORD, Items.STONE_SWORD, Items.IRON_SWORD, Items.GOLDEN_SWORD, Items.DIAMOND_SWORD, Items.NETHERITE_SWORD);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

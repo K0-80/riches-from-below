@@ -87,7 +87,7 @@ public class GatchaBallEntity extends LivingEntity {
             ItemStack.fromNbt(getRegistryManager(), nbtList.getCompound(i)).ifPresent(this.lootToDrop::add);
         }
     }
-    //loot end
+
 
 
 
@@ -97,7 +97,6 @@ public class GatchaBallEntity extends LivingEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.0);
     }
 
-    //amazing ai generated slop start
     public final Quaternionf clientRotation = new Quaternionf();
     public final Quaternionf prevClientRotation = new Quaternionf();
 
@@ -125,23 +124,22 @@ public class GatchaBallEntity extends LivingEntity {
                 if (this.isOnGround()) {
                     this.hasLanded = true;
                 } else {
-                    // Apply random tumbling rotation in the air
+
                     this.clientRotation.rotateLocalX((float) Math.toRadians(this.pitchSpeed));
                     this.clientRotation.rotateLocalY((float) Math.toRadians(this.yawSpeed));
                     this.clientRotation.rotateLocalZ((float) Math.toRadians(this.rollSpeed));
                 }
             } else {
-                // Apply rolling rotation on the ground based on velocity
+
                 Vec3d velocity = this.getVelocity();
                 double horizontalSpeed = velocity.horizontalLength();
 
                 if (horizontalSpeed > 0.01) {
-                    // Axis of rotation is perpendicular to the velocity vector
+
                     Vec3d rollAxis = new Vec3d(-velocity.z, 0.0, velocity.x).normalize();
-                    // Amount of rotation is proportional to the distance traveled
+
                     float rollAmount = (float)horizontalSpeed * 65.0F;
 
-                    // Create an incremental rotation and multiply it with the current orientation
                     Quaternionf deltaRotation = new Quaternionf().fromAxisAngleDeg((float)rollAxis.x, (float)rollAxis.y, (float)rollAxis.z, rollAmount);
                     this.clientRotation.mul(deltaRotation);
                 }
@@ -149,7 +147,7 @@ public class GatchaBallEntity extends LivingEntity {
             this.clientRotation.normalize(); // Prevent floating-point drift over time
         }
     }
-    //amazing ai generated slop end
+
 
 
     @Override
@@ -274,7 +272,6 @@ public class GatchaBallEntity extends LivingEntity {
             }
         }
 
-        // Reset fall distance. This prevents this code from running again until the next fall.
         this.onLanding();
     }
 

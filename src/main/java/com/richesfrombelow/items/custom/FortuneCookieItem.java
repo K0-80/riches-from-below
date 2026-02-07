@@ -45,7 +45,7 @@ public class FortuneCookieItem extends Item {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (user instanceof PlayerEntity player) {
             if (!world.isClient) {
-                // This ensures the main hand item is consumed, even if it stacks
+
                 if (!player.getAbilities().creativeMode) {
                     stack.decrement(1);
                 }

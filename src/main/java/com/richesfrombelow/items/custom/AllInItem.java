@@ -41,7 +41,6 @@ public class AllInItem extends Item {
             if (coinCount > 0) {
                 int duration = coinCount * 20;
 
-                // Amplifier scales with coin count
                 int strengthAmp = Math.min(4, coinCount / 16); // max Strength V (amp 4)
                 int speedAmp = Math.min(4, coinCount / 16); // max Speed V (amp 4)
                 int resistanceAmp = Math.min(3, coinCount / 32); // max Resistance IV (amp 3)

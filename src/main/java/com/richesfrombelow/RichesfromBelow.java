@@ -7,7 +7,8 @@ import com.richesfrombelow.component.ModDataComponents;
 import com.richesfrombelow.entities.ModEntities;
 import com.richesfrombelow.items.ModItemGroups;
 import com.richesfrombelow.items.ModItems;
-import com.richesfrombelow.util.ModLootTableModifiers;
+import com.richesfrombelow.loot.ModChestLootInjector;
+import com.richesfrombelow.loot.ModLootTableModifiers;
 import com.richesfrombelow.util.TaskScheduler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
@@ -33,6 +34,7 @@ public class RichesfromBelow implements ModInitializer {
 		ModDataComponents.register();
 
 		ModLootTableModifiers.modifyLootTables();
+		ModChestLootInjector.register();
 
 		ModCommands.registerCommands();
 		TaskScheduler.initialize();

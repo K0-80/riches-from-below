@@ -1,4 +1,4 @@
-// New File: src/main/java/com/richesfrombelow/mixin/PlayerEntityDamageMixin.java
+
 package com.richesfrombelow.mixin;
 
 import com.richesfrombelow.component.ModDataComponents;

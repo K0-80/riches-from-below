@@ -1,4 +1,4 @@
-package com.richesfrombelow.util;
+package com.richesfrombelow.loot;
 
 import com.richesfrombelow.items.ModItems;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
